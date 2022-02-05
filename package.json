@@ -4,6 +4,7 @@
   "description": "app to help prevent food waste at home",
   "private": true,
   "scripts": {
+    "start": "webpack serve --config webpack/webpack.config.js --open",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
