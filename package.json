@@ -2,7 +2,7 @@
   "name": "fridge",
   "version": "1.0.0",
   "description": "app to help prevent food waste at home",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
