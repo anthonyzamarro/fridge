@@ -1,3 +1,3 @@
-# fridge
+# React Webpack Typescript Custom Boilerplate
 
-App that helps prevent food waste at home
+custom webpack boilerplate setup for react

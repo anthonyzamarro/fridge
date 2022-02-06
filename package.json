@@ -1,7 +1,7 @@
 {
-  "name": "fridge",
+  "name": "React Webpack Typescript Boiler Plate",
   "version": "1.0.0",
-  "description": "app to help prevent food waste at home",
+  "description": "custom webpack and typescript boilerplate for react",
   "private": true,
   "scripts": {
     "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
