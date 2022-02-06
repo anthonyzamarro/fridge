@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable prettier/prettier */
 module.exports = {
     parser: '@typescript-eslint/parser',
     parserOptions: {
