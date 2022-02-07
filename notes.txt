@@ -19,9 +19,23 @@ Other features of App
 - Recommended meals for specific items in kitchen (make calls to various recipe APIs using specific ingredients)
 - Get price of items to show users how much they are spending on food
 - Option to donate food that is getting close to expiration?
-- See list of foods bought overtime to understand what user normally eats.
+- See list of foods bought overtime to understand what user normally eats
 - Alerts on food items going on sale at local grocery store(s)
 - Links to education about food waste and other ways to save/conserve food
+
+Schema
+- User
+    - name
+    - Food list
+    - location?
+- Food list
+    - Food Item
+    - list name
+    - date/time food list created
+- Food Item
+    - food category (meat, dairy, sweets, fish, grain, vegetable, fruit, fat/oil, leftovers, prepared meal)
+    - expiration date of food item (computed or hard-coded)
+    - price?
 
 
 
