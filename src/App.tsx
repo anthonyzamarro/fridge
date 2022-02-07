@@ -1,4 +1,7 @@
+// components
 import FoodList from './components/FoodList/FoodList';
+import Form from './components/Form/Form';
+
 import './styles.css';
 
 const defaultData = [
@@ -29,6 +32,7 @@ export const App = () => {
   return (
     <>
       <h1>Hello, React {process.env.NODE_ENV}</h1>
+      <Form />
       <FoodList listName={'first list'} listId={0} foods={defaultData} />
     </>
   );
