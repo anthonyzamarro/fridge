@@ -5,7 +5,7 @@ interface FoodListProps {
   listId: number;
   foods: object[];
 }
-
+// https://simplernerd.com/typescript-dynamic-json/
 interface FoodItemProps {
   [key: string]: any;
 }
