@@ -24,7 +24,7 @@ const Form = ({ handleForm }: FormProps) => {
         defaultValue={data}
         onChange={handleChange}
       />
-      {/* <input
+      <input
         type="text"
         name="group"
         placeholder="food group"
@@ -35,7 +35,7 @@ const Form = ({ handleForm }: FormProps) => {
         name="expiration"
         placeholder="food expiration date"
         defaultValue={''}
-      /> */}
+      />
       <input
         type="button"
         name="submit"
