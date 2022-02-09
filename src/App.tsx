@@ -40,10 +40,10 @@ import './styles.css';
 // };
 
 export const App = () => {
-  const [newFoodListData, setnewFoodListData] = useState<object>({});
+  const [newFoodListData, setNewFoodListData] = useState<object>({});
 
   const handleFormData = (data: object) => {
-    setnewFoodListData({
+    setNewFoodListData({
       ...data,
     });
   };

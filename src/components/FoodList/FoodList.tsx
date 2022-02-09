@@ -26,6 +26,7 @@ const FoodList = ({ listName, listId, foods }: FoodListProps) => {
                 name={foodItem.name}
                 expiration={foodItem.expiration}
                 group={foodItem.group}
+                price={foodItem.price}
               />
             </li>
           );

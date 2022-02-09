@@ -2,9 +2,7 @@
 // 2022-02-09 -- YYY-MM-DD = HTML Input
 // 2/9/2022   -- MM-DD-YYY = new Date()
 const formatFromHtml = (date: string) => {
-  // let formatted = new Date();
   const [year, month, day] = date.split('-');
-  // console.log(`${day}/${month}/${year}`, date.split('-'));
   return `${month}/${day}/${year}`;
 };
 

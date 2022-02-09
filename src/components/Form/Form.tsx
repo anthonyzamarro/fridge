@@ -7,20 +7,25 @@ interface FormProps {
 }
 
 const Form = ({ handleForm }: FormProps) => {
-  const [foodName, setfoodName] = useState('');
-  const [foodGroup, setfoodGroup] = useState('');
-  const [foodExpiration, setfoodExpiration] = useState('');
+  const [foodName, setFoodName] = useState('');
+  const [foodGroup, setFoodGroup] = useState('');
+  const [foodExpiration, setFoodExpiration] = useState('');
+  const [foodPrice, setFoodPrice] = useState(0);
 
   const handleFoodNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setfoodName(e.target.value);
+    setFoodName(e.target.value);
   };
 
   const handleFoodGroupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setfoodGroup(e.target.value);
+    setFoodGroup(e.target.value);
   };
 
   const handleExpirationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setfoodExpiration(e.target.value);
+    setFoodExpiration(e.target.value);
+  };
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFoodPrice(parseInt(e.target.value));
   };
 
   const submitFormData = () => {
@@ -28,6 +33,7 @@ const Form = ({ handleForm }: FormProps) => {
       name: foodName,
       group: foodGroup,
       expiration: dateFormat(foodExpiration),
+      price: foodPrice,
       id: 0,
     });
   };
@@ -60,7 +66,17 @@ const Form = ({ handleForm }: FormProps) => {
         name="expiration"
         placeholder="food expiration date"
         onChange={handleExpirationChange}
-        defaultValue={''}
+        defaultValue={foodExpiration}
+      />
+      <br />
+      <br />
+      <label htmlFor="price">Price: </label>
+      <input
+        type="number"
+        name="price"
+        placeholder="price"
+        onChange={handlePriceChange}
+        defaultValue={foodPrice.toString()}
       />
       <br />
       <br />
