@@ -40,17 +40,24 @@ import './styles.css';
 // };
 
 export const App = () => {
-  const [newFoodListData, setNewFoodListData] = useState<object>({});
+  // each food item
+  const [foodListData, setfoodListData] = useState<object[]>([]);
+  // each food list
   const [foodList, setFoodList] = useState<boolean>(false);
+  const [foodListId, setFoodListId] = useState<number>(0);
 
-  const handleFormData = (data: object) => {
-    setNewFoodListData({
-      ...data,
-    });
+  const handleFormData = (newFoodListData: object) => {
+    setfoodListData([
+      ...foodListData,
+      {
+        ...newFoodListData,
+      },
+    ]);
   };
 
   const handleNewFoodList = () => {
     setFoodList(!foodList);
+    setFoodListId(foodListId + 1);
   };
 
   return (
@@ -64,13 +71,9 @@ export const App = () => {
         />
       </div>
       {foodList && (
-        <div>
+        <div className="new-food-list">
           <Form handleForm={handleFormData} />
-          <FoodList
-            listName={'first list'}
-            listId={0}
-            foods={newFoodListData}
-          />
+          <FoodList listId={foodListId} foods={foodListData} />
         </div>
       )}
     </>
