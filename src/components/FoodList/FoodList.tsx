@@ -17,7 +17,6 @@ const FoodList = ({ listName, listId, foods }: FoodListProps) => {
       {[foods].map((food: object) => {
         let foodItem: FoodItemProps = {};
         foodItem = food;
-        // console.log(foodItem);
         {
           return (
             <li key={foodItem.id + 1}>
