@@ -1,41 +1,69 @@
 import { useState } from 'react';
-// import { FoodItemProps } from '../FoodItem/FoodItem';
+// utils functions
+import { dateFormat } from '../../utils/dateFormat';
 
 interface FormProps {
   handleForm: (val: object) => void;
 }
 
 const Form = ({ handleForm }: FormProps) => {
-  const [data, setData] = useState('');
+  const [foodName, setfoodName] = useState('');
+  const [foodGroup, setfoodGroup] = useState('');
+  const [foodExpiration, setfoodExpiration] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData(e.target.value);
+  const handleFoodNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setfoodName(e.target.value);
+  };
+
+  const handleFoodGroupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setfoodGroup(e.target.value);
+  };
+
+  const handleExpirationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setfoodExpiration(e.target.value);
   };
 
   const submitFormData = () => {
-    handleForm({ inputData: data });
+    handleForm({
+      name: foodName,
+      group: foodGroup,
+      expiration: dateFormat(foodExpiration),
+      id: 0,
+    });
   };
+
   return (
     <form>
+      <label htmlFor="name">Food Name: </label>
       <input
         type="text"
         name="name"
         placeholder="food name"
-        defaultValue={data}
-        onChange={handleChange}
+        defaultValue={foodName}
+        onChange={handleFoodNameChange}
       />
+      <br />
+      <br />
+      <label htmlFor="group">Food Group: </label>
       <input
         type="text"
         name="group"
         placeholder="food group"
-        defaultValue={''}
+        defaultValue={foodGroup}
+        onChange={handleFoodGroupChange}
       />
+      <br />
+      <br />
+      <label htmlFor="expiration">Expiration Date: </label>
       <input
         type="date"
         name="expiration"
         placeholder="food expiration date"
+        onChange={handleExpirationChange}
         defaultValue={''}
       />
+      <br />
+      <br />
       <input
         type="button"
         name="submit"
