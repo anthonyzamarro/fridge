@@ -1,4 +1,4 @@
-interface FoodItemProps {
+export interface FoodItemProps {
   name: string;
   expiration: number;
   group: string;

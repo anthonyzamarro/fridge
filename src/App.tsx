@@ -32,7 +32,7 @@ export const App = () => {
   return (
     <>
       <h1>Hello, React {process.env.NODE_ENV}</h1>
-      <Form />
+      <Form name={'food'} expiration={3} group={'e'} id={1} />
       <FoodList listName={'first list'} listId={0} foods={defaultData} />
     </>
   );
