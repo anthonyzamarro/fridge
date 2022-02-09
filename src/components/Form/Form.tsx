@@ -1,13 +1,47 @@
-// import { useState } from 'react';
-import { FoodItemProps } from '../FoodItem/FoodItem';
+import { useState } from 'react';
+// import { FoodItemProps } from '../FoodItem/FoodItem';
 
-const Form = ({ name, expiration, group, id }: FoodItemProps) => {
-  console.log(id);
+interface FormProps {
+  handleForm: (val: object) => void;
+}
+
+const Form = ({ handleForm }: FormProps) => {
+  const [data, setData] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData(e.target.value);
+  };
+
+  const submitFormData = () => {
+    handleForm({ inputData: data });
+  };
   return (
     <form>
-      <input type="text" name="name" value={name} />
-      <input type="text" name="group" value={group} />
-      <input type="date" name="expiration" value={expiration} />
+      <input
+        type="text"
+        name="name"
+        placeholder="food name"
+        defaultValue={data}
+        onChange={handleChange}
+      />
+      {/* <input
+        type="text"
+        name="group"
+        placeholder="food group"
+        defaultValue={''}
+      />
+      <input
+        type="date"
+        name="expiration"
+        placeholder="food expiration date"
+        defaultValue={''}
+      /> */}
+      <input
+        type="button"
+        name="submit"
+        onClick={submitFormData}
+        defaultValue="Submit"
+      />
     </form>
   );
 };

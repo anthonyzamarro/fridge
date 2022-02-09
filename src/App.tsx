@@ -1,3 +1,4 @@
+// import { useEffect, useState } from 'react';
 // components
 import FoodList from './components/FoodList/FoodList';
 import Form from './components/Form/Form';
@@ -28,11 +29,24 @@ const defaultData = [
   },
 ];
 
+// const defaultFoodData = {
+//   name: '',
+//   group: '',
+//   expiration: new Date(),
+//   id: 0,
+// };
+
 export const App = () => {
+  // const [newFoodListData, setnewFoodListData] =
+  //   useState<object>(defaultFoodData);
+
+  const handleFormData = (data: object) => {
+    console.log(data);
+  };
   return (
     <>
       <h1>Hello, React {process.env.NODE_ENV}</h1>
-      <Form name={'food'} expiration={3} group={'e'} id={1} />
+      <Form handleForm={handleFormData} />
       <FoodList listName={'first list'} listId={0} foods={defaultData} />
     </>
   );
