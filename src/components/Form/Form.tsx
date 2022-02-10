@@ -13,19 +13,21 @@ const Form = ({ handleForm }: FormProps) => {
   const [foodPrice, setFoodPrice] = useState(0);
   const [foodId, setFoodId] = useState(0);
 
-  const handleFoodNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFoodName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodName(e.target.value);
   };
 
-  const handleFoodGroupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFoodGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodGroup(e.target.value);
   };
 
-  const handleExpirationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFoodExpiration = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setFoodExpiration(e.target.value);
   };
 
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFoodPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodPrice(parseInt(e.target.value));
   };
 
@@ -48,7 +50,7 @@ const Form = ({ handleForm }: FormProps) => {
         name="name"
         placeholder="food name"
         defaultValue={foodName}
-        onChange={handleFoodNameChange}
+        onChange={handleChangeFoodName}
       />
       <br />
       <br />
@@ -58,7 +60,7 @@ const Form = ({ handleForm }: FormProps) => {
         name="group"
         placeholder="food group"
         defaultValue={foodGroup}
-        onChange={handleFoodGroupChange}
+        onChange={handleChangeFoodGroup}
       />
       <br />
       <br />
@@ -67,7 +69,7 @@ const Form = ({ handleForm }: FormProps) => {
         type="date"
         name="expiration"
         placeholder="food expiration date"
-        onChange={handleExpirationChange}
+        onChange={handleChangeFoodExpiration}
         defaultValue={foodExpiration}
       />
       <br />
@@ -77,7 +79,7 @@ const Form = ({ handleForm }: FormProps) => {
         type="number"
         name="price"
         placeholder="price"
-        onChange={handlePriceChange}
+        onChange={handleChangeFoodPrice}
         defaultValue={foodPrice.toString()}
       />
       <br />

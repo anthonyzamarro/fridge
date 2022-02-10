@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 export interface FoodItemProps {
   name: string;
   expiration: string;
@@ -9,15 +7,14 @@ export interface FoodItemProps {
 }
 
 const FoodItem = ({ name, expiration, group, price, id }: FoodItemProps) => {
-  useEffect(() => {
-    console.log(name, id);
-  }, [name, id]);
   return (
     <div key={id}>
       <label htmlFor={'foodName'}>
+        <p>Food Name:</p>
         <input type="text" name={name} id={name} defaultValue={name} />
       </label>
       <label htmlFor={'foodGroup'}>
+        <p>Food Group:</p>
         <input type="text" name={group} id={group} defaultValue={group} />
       </label>
       <label htmlFor={'foodExpiration'}>
