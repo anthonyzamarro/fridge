@@ -1,3 +1,15 @@
 h1 {
   color: orange;
 }
+
+.food-list__container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.food-list {
+  border: 5px solid tomato;
+  margin: 20px;
+  padding: 10px;
+}
