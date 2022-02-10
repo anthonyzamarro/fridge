@@ -11,6 +11,7 @@ const Form = ({ handleForm }: FormProps) => {
   const [foodGroup, setFoodGroup] = useState('');
   const [foodExpiration, setFoodExpiration] = useState('');
   const [foodPrice, setFoodPrice] = useState(0);
+  const [foodId, setFoodId] = useState(0);
 
   const handleFoodNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodName(e.target.value);
@@ -29,12 +30,13 @@ const Form = ({ handleForm }: FormProps) => {
   };
 
   const submitFormData = () => {
+    setFoodId(foodId + 1);
     handleForm({
       name: foodName,
       group: foodGroup,
       expiration: dateFormat(foodExpiration),
       price: foodPrice,
-      id: 0,
+      id: foodId,
     });
   };
 

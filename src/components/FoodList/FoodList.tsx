@@ -37,22 +37,19 @@ const FoodList = ({ listId }: FoodListProps) => {
         placeholder="food list title"
       />
       <Form handleForm={handleFormData} />
-      {foodListData.map((food: object) => {
-        let foodItem: FoodItemProps = {};
-        foodItem = food;
-        {
-          return (
-            <li key={foodItem.id++}>
-              <FoodItem
-                id={foodItem.id++}
-                name={foodItem.name}
-                expiration={foodItem.expiration}
-                group={foodItem.group}
-                price={foodItem.price}
-              />
-            </li>
-          );
-        }
+      {console.log(foodListData)}
+      {foodListData.map((food: FoodItemProps) => {
+        return (
+          <li key={food.id}>
+            <FoodItem
+              id={food.id}
+              name={food.name}
+              expiration={food.expiration}
+              group={food.group}
+              price={food.price}
+            />
+          </li>
+        );
       })}
     </div>
   );
