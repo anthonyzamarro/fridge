@@ -6,26 +6,22 @@ import './styles.css';
 
 interface FoodListArrayProps {
   id: number;
-  title: string;
   list: object[];
 }
 
 export const App = () => {
   const [foodListId, setFoodListId] = useState<number>(0);
   const [foodList, setFoodList] = useState<FoodListArrayProps[]>([]);
-  const [foodListTitle, setFoodListTitle] = useState<string>('');
 
   const handleClickAddFoodList = () => {
     setFoodList([
       ...foodList,
       {
         id: foodListId,
-        title: foodListTitle,
         list: [],
       },
     ]);
     setFoodListId(foodListId + 1);
-    setFoodListTitle(`${foodListId} list`);
   };
 
   return (
@@ -42,14 +38,7 @@ export const App = () => {
       <div className="food-list__container">
         {foodList.length > 0 &&
           foodList.map((list) => {
-            console.log(list);
-            return (
-              <FoodList
-                key={list.id}
-                foodListTitle={list.title}
-                listId={list.id}
-              />
-            );
+            return <FoodList key={list.id} listId={list.id} />;
           })}
       </div>
     </>

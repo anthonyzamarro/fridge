@@ -5,20 +5,19 @@ import Form from '../Form/Form';
 
 interface FoodListProps {
   listId: number;
-  // foods: object[];
-  foodListTitle: string;
 }
 // https://simplernerd.com/typescript-dynamic-json/
 interface FoodItemProps {
   [key: string]: any;
 }
 
-const FoodList = ({ listId, foodListTitle }: FoodListProps) => {
-  // const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setFoodListTitle(e.target.value);
-  // };
-
+const FoodList = ({ listId }: FoodListProps) => {
+  const [foodListTitle, setFoodListTitle] = useState<string>('');
   const [foodListData, setFoodListData] = useState<object[]>([]);
+
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFoodListTitle(e.target.value);
+  };
 
   const handleFormData = (newFoodListData: object) => {
     setFoodListData([
@@ -34,7 +33,7 @@ const FoodList = ({ listId, foodListTitle }: FoodListProps) => {
       <input
         type="text"
         defaultValue={foodListTitle}
-        // onChange={handleChangeTitle}
+        onChange={handleChangeTitle}
         placeholder="food list title"
       />
       <Form handleForm={handleFormData} />
