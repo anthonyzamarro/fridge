@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // components
 import FoodList from './components/FoodList/FoodList';
 import Form from './components/Form/Form';
@@ -8,67 +8,46 @@ import Form from './components/Form/Form';
 
 import './styles.css';
 
-// const defaultData = [
-//   {
-//     name: 'pop corn',
-//     expiration: new Date(),
-//     group: 'grain',
-//     id: 0,
-//     price: 5,
-//   },
-//   {
-//     name: 'carrots',
-//     expiration: new Date(),
-//     group: 'vegetable',
-//     id: 1,
-//     price: 1,
-//   },
-//   {
-//     name: 'blueberries',
-//     expiration: new Date(),
-//     group: 'fruit',
-//     id: 2,
-//     price: 2,
-//   },
-// ];
-
-// const defaultFoodData = {
-//   name: '',
-//   group: '',
-//   expiration: new Date(),
-//   id: 0,
-// };
+interface FoodListArrayProps {
+  id: number;
+  title: string;
+  list: object[];
+}
 
 export const App = () => {
   // each food item
-  const [foodListData, setfoodListData] = useState<object[]>([]);
+  const [foodListData, setFoodListData] = useState<object[]>([]);
   // each food list
-  const [addFoodList, setaddFoodList] = useState<boolean>(false);
+  // const [addFoodList, setAddFoodList] = useState<object[]>([]);
   const [foodListId, setFoodListId] = useState<number>(0);
-  const [foodList, setFoodList] = useState<object>({});
-  const [foodListTitle, setFoodListTitle] = useState<string>('Food List Title');
+  const [foodList, setFoodList] = useState<FoodListArrayProps[]>([]);
+  const [foodListTitle, setFoodListTitle] = useState<string>('');
 
   const handleFormData = (newFoodListData: object) => {
-    setfoodListData([
+    setFoodListData([
       ...foodListData,
       {
         ...newFoodListData,
       },
     ]);
-    setFoodList({
-      foodListId,
-      foodListData,
-    });
   };
 
-  const handleNewFoodList = () => {
-    setaddFoodList(!addFoodList);
+  const handleClickAddFoodList = () => {
+    setFoodList([
+      ...foodList,
+      {
+        id: foodListId,
+        title: foodListTitle,
+        list: [],
+      },
+    ]);
     setFoodListId(foodListId + 1);
+    setFoodListTitle(`${foodListId} list`);
   };
 
-  useEffect(() => {
-    console.log(foodListData, foodList, foodListId);
-  }, [foodListData, foodList, foodListId]);
+  // useEffect(() => {
+  //   console.log(foodListData, foodListId, foodListTitle);
+  // }, [foodListData, foodListId, foodListTitle]);
 
   return (
     <>
@@ -76,21 +55,32 @@ export const App = () => {
       <div>
         <input
           type="button"
-          onClick={handleNewFoodList}
+          onClick={handleClickAddFoodList}
           value="Add Food List"
         />
       </div>
-      {addFoodList && (
-        <div className="new-food-list">
-          <Form handleForm={handleFormData} />
-          <FoodList
-            foodListTitle={foodListTitle}
-            setFoodListTitle={setFoodListTitle}
-            listId={foodListId}
-            foods={foodListData}
-          />
-        </div>
-      )}
+      <Form handleForm={handleFormData} />
+      <div className="new-food-list">
+        {foodList.length &&
+          foodList.map((list) => {
+            console.log(list);
+            return (
+              <FoodList
+                key={list.id}
+                foodListTitle={list.title}
+                // setFoodListTitle={setFoodListTitle}
+                listId={list.id}
+                foods={foodListData}
+              />
+            );
+          })}
+        {/* <FoodList
+          foodListTitle={foodListTitle}
+          setFoodListTitle={setFoodListTitle}
+          listId={foodListId}
+          foods={foodListData}
+        /> */}
+      </div>
     </>
   );
 };

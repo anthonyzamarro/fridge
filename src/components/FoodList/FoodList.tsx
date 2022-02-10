@@ -1,31 +1,31 @@
 // import { useState } from 'react';
 import FoodItem from '../FoodItem/FoodItem';
+// import FoodItemProps from '../FoodItem/FoodItem';
 
 interface FoodListProps {
   listId: number;
   foods: object[];
   foodListTitle: string;
-  setFoodListTitle: (title: string) => void;
 }
 // https://simplernerd.com/typescript-dynamic-json/
 interface FoodItemProps {
   [key: string]: any;
 }
 
-const FoodList = ({
-  listId,
-  foods,
-  foodListTitle,
-  setFoodListTitle,
-}: FoodListProps) => {
-  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFoodListTitle(e.target.value);
-  };
+const FoodList = ({ listId, foods, foodListTitle }: FoodListProps) => {
+  // const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFoodListTitle(e.target.value);
+  // };
 
   return (
     <div key={listId}>
       <h2>
-        <input type="text" value={foodListTitle} onChange={handleChangeTitle} />
+        <input
+          type="text"
+          defaultValue={foodListTitle}
+          // onChange={handleChangeTitle}
+          placeholder="food list title"
+        />
       </h2>
       {/* {console.log(foods)} */}
       {foods.map((food: object) => {
