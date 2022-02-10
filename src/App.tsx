@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 // components
 import FoodList from './components/FoodList/FoodList';
 import Form from './components/Form/Form';
@@ -43,8 +43,10 @@ export const App = () => {
   // each food item
   const [foodListData, setfoodListData] = useState<object[]>([]);
   // each food list
-  const [foodList, setFoodList] = useState<boolean>(false);
+  const [addFoodList, setaddFoodList] = useState<boolean>(false);
   const [foodListId, setFoodListId] = useState<number>(0);
+  const [foodList, setFoodList] = useState<object>({});
+  const [foodListTitle, setFoodListTitle] = useState<string>('Food List Title');
 
   const handleFormData = (newFoodListData: object) => {
     setfoodListData([
@@ -53,12 +55,20 @@ export const App = () => {
         ...newFoodListData,
       },
     ]);
+    setFoodList({
+      foodListId,
+      foodListData,
+    });
   };
 
   const handleNewFoodList = () => {
-    setFoodList(!foodList);
+    setaddFoodList(!addFoodList);
     setFoodListId(foodListId + 1);
   };
+
+  useEffect(() => {
+    console.log(foodListData, foodList, foodListId);
+  }, [foodListData, foodList, foodListId]);
 
   return (
     <>
@@ -70,10 +80,15 @@ export const App = () => {
           value="Add Food List"
         />
       </div>
-      {foodList && (
+      {addFoodList && (
         <div className="new-food-list">
           <Form handleForm={handleFormData} />
-          <FoodList listId={foodListId} foods={foodListData} />
+          <FoodList
+            foodListTitle={foodListTitle}
+            setFoodListTitle={setFoodListTitle}
+            listId={foodListId}
+            foods={foodListData}
+          />
         </div>
       )}
     </>

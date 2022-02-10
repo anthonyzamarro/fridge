@@ -1,18 +1,23 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import FoodItem from '../FoodItem/FoodItem';
 
 interface FoodListProps {
   listId: number;
   foods: object[];
+  foodListTitle: string;
+  setFoodListTitle: (title: string) => void;
 }
 // https://simplernerd.com/typescript-dynamic-json/
 interface FoodItemProps {
   [key: string]: any;
 }
 
-const FoodList = ({ listId, foods }: FoodListProps) => {
-  const [foodListTitle, setFoodListTitle] = useState<string>('Food List Title');
-
+const FoodList = ({
+  listId,
+  foods,
+  foodListTitle,
+  setFoodListTitle,
+}: FoodListProps) => {
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodListTitle(e.target.value);
   };
@@ -22,7 +27,7 @@ const FoodList = ({ listId, foods }: FoodListProps) => {
       <h2>
         <input type="text" value={foodListTitle} onChange={handleChangeTitle} />
       </h2>
-      {console.log(foods)}
+      {/* {console.log(foods)} */}
       {foods.map((food: object) => {
         let foodItem: FoodItemProps = {};
         foodItem = food;
