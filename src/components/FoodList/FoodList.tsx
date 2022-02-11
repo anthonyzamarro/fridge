@@ -19,7 +19,7 @@ const FoodList = ({ listId }: FoodListProps) => {
     setFoodListTitle(e.target.value);
   };
 
-  const handleFormData = (newFoodListData: object) => {
+  const handleAddFoodListItem = (newFoodListData: object) => {
     setFoodListData([
       ...foodListData,
       {
@@ -43,7 +43,7 @@ const FoodList = ({ listId }: FoodListProps) => {
         onChange={handleChangeTitle}
         placeholder="food list title"
       />
-      <Form handleForm={handleFormData} />
+      <Form handleForm={handleAddFoodListItem} />
       {foodListData.map((food: FoodItemProps) => {
         return (
           <li key={food.id}>
