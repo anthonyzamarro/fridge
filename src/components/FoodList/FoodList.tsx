@@ -28,6 +28,13 @@ const FoodList = ({ listId }: FoodListProps) => {
     ]);
   };
 
+  const handleDeleteFoodItem = (foodId: number) => {
+    const updatedList = foodListData.filter(
+      (food: FoodItemProps) => food.id !== foodId
+    );
+    setFoodListData([...updatedList]);
+  };
+
   return (
     <div key={listId} className="food-list">
       <input
@@ -37,7 +44,6 @@ const FoodList = ({ listId }: FoodListProps) => {
         placeholder="food list title"
       />
       <Form handleForm={handleFormData} />
-      {console.log(foodListData)}
       {foodListData.map((food: FoodItemProps) => {
         return (
           <li key={food.id}>
@@ -47,6 +53,7 @@ const FoodList = ({ listId }: FoodListProps) => {
               expiration={food.expiration}
               group={food.group}
               price={food.price}
+              deleteFoodFromList={handleDeleteFoodItem}
             />
           </li>
         );

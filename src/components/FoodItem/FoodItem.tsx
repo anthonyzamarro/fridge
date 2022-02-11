@@ -4,9 +4,21 @@ export interface FoodItemProps {
   group: string;
   id: number;
   price?: number;
+  deleteFoodFromList: (id: number) => void;
 }
 
-const FoodItem = ({ name, expiration, group, price, id }: FoodItemProps) => {
+const FoodItem = ({
+  name,
+  expiration,
+  group,
+  price,
+  id,
+  deleteFoodFromList,
+}: FoodItemProps) => {
+  const handleClickDeleteFoodItem = () => {
+    deleteFoodFromList(id);
+  };
+
   return (
     <div key={id}>
       <label htmlFor={'foodName'}>
@@ -18,6 +30,7 @@ const FoodItem = ({ name, expiration, group, price, id }: FoodItemProps) => {
         <input type="text" name={group} id={group} defaultValue={group} />
       </label>
       <label htmlFor={'foodExpiration'}>
+        <p>Expiration Date:</p>
         <input
           type="date"
           name={expiration}
@@ -26,6 +39,7 @@ const FoodItem = ({ name, expiration, group, price, id }: FoodItemProps) => {
         />
       </label>
       <label htmlFor={'foodPrice'}>
+        <p>Price:</p>
         <input
           type="number"
           name={price?.toString()}
@@ -33,6 +47,8 @@ const FoodItem = ({ name, expiration, group, price, id }: FoodItemProps) => {
           defaultValue={price}
         />
       </label>
+      <br />
+      <button onClick={handleClickDeleteFoodItem}>Delete food item</button>
     </div>
   );
 };
