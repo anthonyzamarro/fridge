@@ -2,8 +2,10 @@ import { useState } from 'react';
 // utils functions
 import { dateFormat } from '../../utils/dateFormat';
 
+import { FoodListProps } from '../FoodList/FoodList';
+
 interface FormProps {
-  handleForm: (val: object) => void;
+  handleForm: (val: FoodListProps) => void;
 }
 
 const Form = ({ handleForm }: FormProps) => {

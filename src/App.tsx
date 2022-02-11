@@ -38,7 +38,7 @@ export const App = () => {
       <div className="food-list__container">
         {foodList.length > 0 &&
           foodList.map((list) => {
-            return <FoodList key={list.id} listId={list.id} />;
+            return <FoodList key={list.id} id={list.id} />;
           })}
       </div>
     </>

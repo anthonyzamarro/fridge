@@ -1,17 +1,17 @@
 // import { useState } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FoodItem from '../FoodItem/FoodItem';
 import Form from '../Form/Form';
 
-interface FoodListProps {
-  listId: number;
+export interface FoodListProps {
+  id: number;
 }
 // https://simplernerd.com/typescript-dynamic-json/
 interface FoodItemProps {
   [key: string]: any;
 }
 
-const FoodList = ({ listId }: FoodListProps) => {
+const FoodList = ({ id }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
   const [foodListData, setFoodListData] = useState<object[]>([]);
 
@@ -19,7 +19,7 @@ const FoodList = ({ listId }: FoodListProps) => {
     setFoodListTitle(e.target.value);
   };
 
-  const handleAddFoodListItem = (newFoodListData: object) => {
+  const handleAddFoodListItem = (newFoodListData: FoodListProps) => {
     setFoodListData([
       ...foodListData,
       {
@@ -35,8 +35,19 @@ const FoodList = ({ listId }: FoodListProps) => {
     setFoodListData([...updatedList]);
   };
 
+  useEffect(() => {
+    // console.log(foodListData, id);
+    // TODO: fix logic for adding foodListTitle to food list
+    localStorage.setItem(
+      id.toString(),
+      !foodListTitle
+        ? JSON.stringify(foodListData)
+        : `${foodListTitle} ${JSON.stringify(foodListData)}`
+    );
+  }, [foodListData, id, foodListTitle]);
+
   return (
-    <div key={listId} className="food-list">
+    <div key={id} className={`food-list ${id}`}>
       <input
         type="text"
         defaultValue={foodListTitle}
