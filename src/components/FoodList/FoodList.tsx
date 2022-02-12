@@ -28,7 +28,7 @@ const FoodList = ({ id }: FoodListProps) => {
     ]);
   };
 
-  const handleDeleteFoodItem = (foodId: number) => {
+  const handleDeleteFoodListItem = (foodId: number) => {
     const updatedList = foodListData.filter(
       (food: FoodItemProps) => food.id !== foodId
     );
@@ -36,15 +36,8 @@ const FoodList = ({ id }: FoodListProps) => {
   };
 
   useEffect(() => {
-    // console.log(foodListData, id);
-    // TODO: fix logic for adding foodListTitle to food list
-    localStorage.setItem(
-      id.toString(),
-      !foodListTitle
-        ? JSON.stringify(foodListData)
-        : `${foodListTitle} ${JSON.stringify(foodListData)}`
-    );
-  }, [foodListData, id, foodListTitle]);
+    localStorage.setItem(id.toString(), JSON.stringify(foodListData));
+  }, [foodListData, id]);
 
   return (
     <div key={id} className={`food-list ${id}`}>
@@ -64,7 +57,7 @@ const FoodList = ({ id }: FoodListProps) => {
               expiration={food.expiration}
               group={food.group}
               price={food.price}
-              deleteFoodFromList={handleDeleteFoodItem}
+              deleteFoodFromList={handleDeleteFoodListItem}
             />
           </li>
         );
