@@ -13,10 +13,15 @@ interface FoodItemProps {
 
 const FoodList = ({ id }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
+  const [foodListTitleUpdated, setFoodListTitleUpdated] = useState<string>('');
   const [foodListData, setFoodListData] = useState<object[]>([]);
 
-  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodListTitle(e.target.value);
+  };
+
+  const handleClickUpdateTitle = (newTitle: string) => {
+    setFoodListTitleUpdated(newTitle);
   };
 
   const handleAddFoodListItem = (newFoodListData: FoodListProps) => {
@@ -36,17 +41,29 @@ const FoodList = ({ id }: FoodListProps) => {
   };
 
   useEffect(() => {
-    localStorage.setItem(id.toString(), JSON.stringify(foodListData));
-  }, [foodListData, id]);
+    localStorage.setItem(
+      id.toString(),
+      JSON.stringify({ title: foodListTitleUpdated, ...foodListData })
+    );
+  }, [foodListData, foodListTitleUpdated, id]);
 
   return (
     <div key={id} className={`food-list ${id}`}>
-      <input
-        type="text"
-        defaultValue={foodListTitle}
-        onChange={handleChangeTitle}
-        placeholder="food list title"
-      />
+      <form>
+        <input
+          type="text"
+          name="foodListTitle"
+          defaultValue={foodListTitle}
+          onChange={handleChangeUpdateTitle}
+          placeholder="food list title"
+        />
+        <input
+          type="button"
+          name="Update Title"
+          value="Update Title"
+          onClick={() => handleClickUpdateTitle(foodListTitle)}
+        />
+      </form>
       <Form handleForm={handleAddFoodListItem} />
       {foodListData.map((food: FoodItemProps) => {
         return (
