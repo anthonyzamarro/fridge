@@ -33,11 +33,15 @@ const FoodList = ({ id }: FoodListProps) => {
     ]);
   };
 
-  const handleDeleteFoodListItem = (foodId: number) => {
+  const handleClickDeleteFoodListItem = (foodId: number) => {
     const updatedList = foodListData.filter(
       (food: FoodItemProps) => food.id !== foodId
     );
     setFoodListData([...updatedList]);
+  };
+
+  const handleClickDeleteFoodList = (foodId: number) => {
+    localStorage.removeItem(foodId.toString());
   };
 
   useEffect(() => {
@@ -49,6 +53,11 @@ const FoodList = ({ id }: FoodListProps) => {
 
   return (
     <div key={id} className={`food-list ${id}`}>
+      <input
+        type="button"
+        value="Delete List"
+        onClick={() => handleClickDeleteFoodList(id)}
+      />
       <form>
         <input
           type="text"
@@ -74,7 +83,7 @@ const FoodList = ({ id }: FoodListProps) => {
               expiration={food.expiration}
               group={food.group}
               price={food.price}
-              deleteFoodFromList={handleDeleteFoodListItem}
+              deleteFoodFromList={handleClickDeleteFoodListItem}
             />
           </li>
         );
