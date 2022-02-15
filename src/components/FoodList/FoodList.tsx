@@ -13,7 +13,8 @@ interface FoodItemProps {
 
 const FoodList = ({ id }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
-  const [foodListTitleUpdated, setFoodListTitleUpdated] = useState<string>('');
+  const [foodListTitleUpdated, setFoodListTitleUpdated] =
+    useState<string>('Food List');
   const [foodListData, setFoodListData] = useState<object[]>([]);
 
   const handleChangeUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
