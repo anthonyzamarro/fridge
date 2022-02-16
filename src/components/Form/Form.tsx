@@ -1,7 +1,7 @@
 import { useState } from 'react';
 // utils functions
 import { dateFormat } from '../../utils/dateFormat';
-
+// props
 import { FoodListProps } from '../FoodList/FoodList';
 
 interface FormProps {
