@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // components
 import FoodList from './components/FoodList/FoodList';
 
@@ -15,13 +15,16 @@ export const App = () => {
 
   const handleClickAddFoodList = () => {
     if (localStorage.length) {
+      // get largest key value from localstorage and add one for new key
       const foodId =
         parseInt(Object.keys(localStorage).sort()[localStorage.length - 1]) + 1;
       Object.keys(localStorage).forEach((key) => {
-        console.log(localStorage[key]);
+        /*
+          spread existing keys into food list and add new items
+        */
         setFoodList([...foodList, { id: foodId, list: localStorage[key] }]);
       });
-      setFoodListId(foodId + 1);
+      setFoodListId(foodId);
     } else {
       setFoodList([
         ...foodList,
@@ -34,23 +37,14 @@ export const App = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (localStorage.length) {
-  // for (const data in localStorage) {
-  //   if (parseInt(data)) {
-  //         // console.log(localStorage[data], data);
-  //         // setFoodList([
-  //         //   // ...localStorage[data],
-  //         //   // {
-  //         //   //   id: 0,
-  //         //   //   // list: localStorage[data],
-  //         //   // },
-  //         // ]);
-  //         // setFoodListId(foodListId + 1);
-  //       }
-  //     }
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.length) {
+      const foods = Object.keys(localStorage).map((key) => {
+        return { id: parseInt(key), list: localStorage[key] };
+      });
+      setFoodList([...foods]);
+    }
+  }, []);
 
   return (
     <>
@@ -66,6 +60,7 @@ export const App = () => {
       <div className="food-list__container">
         {foodList.length > 0 &&
           foodList.map((list) => {
+            // console.log(list);
             return <FoodList key={list.id} id={list.id} />;
           })}
       </div>
