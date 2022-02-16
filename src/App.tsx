@@ -14,15 +14,43 @@ export const App = () => {
   const [foodList, setFoodList] = useState<FoodListArrayProps[]>([]);
 
   const handleClickAddFoodList = () => {
-    setFoodList([
-      ...foodList,
-      {
-        id: foodListId,
-        list: [],
-      },
-    ]);
-    setFoodListId(foodListId + 1);
+    if (localStorage.length) {
+      const foodId =
+        parseInt(Object.keys(localStorage).sort()[localStorage.length - 1]) + 1;
+      Object.keys(localStorage).forEach((key) => {
+        console.log(localStorage[key]);
+        setFoodList([...foodList, { id: foodId, list: localStorage[key] }]);
+      });
+      setFoodListId(foodId + 1);
+    } else {
+      setFoodList([
+        ...foodList,
+        {
+          id: foodListId,
+          list: [],
+        },
+      ]);
+      setFoodListId(foodListId + 1);
+    }
   };
+
+  // useEffect(() => {
+  //   if (localStorage.length) {
+  // for (const data in localStorage) {
+  //   if (parseInt(data)) {
+  //         // console.log(localStorage[data], data);
+  //         // setFoodList([
+  //         //   // ...localStorage[data],
+  //         //   // {
+  //         //   //   id: 0,
+  //         //   //   // list: localStorage[data],
+  //         //   // },
+  //         // ]);
+  //         // setFoodListId(foodListId + 1);
+  //       }
+  //     }
+  //   }
+  // }, []);
 
   return (
     <>
