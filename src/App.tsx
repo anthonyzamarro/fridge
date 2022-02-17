@@ -37,12 +37,21 @@ export const App = () => {
     }
   };
 
+  const updateFoodList = () => {
+    const foods = Object.keys(localStorage).map((key) => {
+      return { id: parseInt(key), list: localStorage[key] };
+    });
+    setFoodList([...foods]);
+  };
+
+  const handleClickDeleteFoodList = (foodId: number) => {
+    localStorage.removeItem(foodId.toString());
+    updateFoodList();
+  };
+
   useEffect(() => {
     if (localStorage.length) {
-      const foods = Object.keys(localStorage).map((key) => {
-        return { id: parseInt(key), list: localStorage[key] };
-      });
-      setFoodList([...foods]);
+      updateFoodList();
     }
   }, []);
 
@@ -60,8 +69,13 @@ export const App = () => {
       <div className="food-list__container">
         {foodList.length > 0 &&
           foodList.map((list) => {
-            // console.log(list);
-            return <FoodList key={list.id} id={list.id} />;
+            return (
+              <FoodList
+                key={list.id}
+                id={list.id}
+                deleteFoodList={handleClickDeleteFoodList}
+              />
+            );
           })}
       </div>
     </>

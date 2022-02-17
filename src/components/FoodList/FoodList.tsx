@@ -5,13 +5,14 @@ import Form from '../Form/Form';
 
 export interface FoodListProps {
   id: number;
+  deleteFoodList: (foodListId: number) => void;
 }
 // https://simplernerd.com/typescript-dynamic-json/
 interface FoodItemProps {
   [key: string]: any;
 }
 
-const FoodList = ({ id }: FoodListProps) => {
+const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
   const [foodListTitleUpdated, setFoodListTitleUpdated] =
     useState<string>('Food List');
@@ -41,9 +42,9 @@ const FoodList = ({ id }: FoodListProps) => {
     setFoodListData([...updatedList]);
   };
 
-  const handleClickDeleteFoodList = (foodId: number) => {
-    localStorage.removeItem(foodId.toString());
-  };
+  // const handleClickDeleteFoodList = (foodId: number) => {
+  //   localStorage.removeItem(foodId.toString());
+  // };
 
   useEffect(() => {
     localStorage.setItem(
@@ -57,7 +58,7 @@ const FoodList = ({ id }: FoodListProps) => {
       <input
         type="button"
         value="Delete List"
-        onClick={() => handleClickDeleteFoodList(id)}
+        onClick={() => deleteFoodList(id)}
       />
       <form>
         <input
