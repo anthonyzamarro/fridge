@@ -6,20 +6,14 @@ import './styles.css';
 
 interface FoodListProps {
   id: number;
-  foods: [];
+  foods: object[];
 }
 
 interface FoodListArrayProps {
-  // id: number;
   list: FoodListProps;
 }
 
-// const keys = Object.keys(localStorage).map((key) => key);
-// const values = Object.keys(localStorage).map((key) => localStorage[key]);
-// console.log(keys, values);
-
 export const App = () => {
-  // const [foodListId, setFoodListId] = useState<number>(0);
   const [foodList, setFoodList] = useState<FoodListArrayProps[]>([]);
 
   const handleClickAddFoodList = () => {
@@ -29,10 +23,8 @@ export const App = () => {
         parseInt(Object.keys(localStorage).sort()[localStorage.length - 1]) + 1;
       Object.keys(localStorage).forEach((key) => {
         /*
-          spread existing keys into food list and add new items
+          spread existing keys into food list state and add new item to state
         */
-        // setFoodList([...foodList, { id: foodId, list: localStorage[key] }]);
-        console.log(localStorage[key]);
         setFoodList([
           ...foodList,
           {
@@ -42,15 +34,18 @@ export const App = () => {
             },
           },
         ]);
-        localStorage.setItem(
-          `${foodId}`,
-          JSON.stringify({ list: { id: foodId, foods: localStorage[key] } })
-        );
       });
-      // setFoodListId(foodId);
+
+      // update localstorage with new item
+      localStorage.setItem(
+        `${foodId}`,
+        JSON.stringify({
+          id: foodId,
+          foods: foodList.filter(({ list }) => list.id === foodId),
+        })
+      );
     } else {
       setFoodList([
-        ...foodList,
         {
           list: {
             id: 0,
@@ -63,23 +58,18 @@ export const App = () => {
         `${0}`,
         JSON.stringify({ list: { id: 0, foods: [] } })
       );
-      // setFoodList([
-      //   ...foodList,
-      //   {
-      //     id: 0,
-      //     list: [],
-      //   },
-      // ]);
-      // setFoodListId(foodListId + 1);
     }
   };
 
   const updateFoodList = () => {
-    // const foods = Object.keys(localStorage).map((key) => {
-    //   return { list: { id: key, foods: localStorage[key] } };
+    const foods = Object.keys(localStorage).map((key) => {
+      return { list: { id: parseInt(key), foods: localStorage[key] } };
+    });
+    // Object.keys(localStorage).forEach((key) => {
+    //   setFoodList([{ list: { id: parseInt(key), foods: localStorage[key] } }]);
     // });
-    // console.log(foods);
-    // setFoodList([...foods]);
+    // console.log(foodList, foods);
+    setFoodList([...foods]);
     // console.log(localStorage);
   };
 
@@ -111,7 +101,7 @@ export const App = () => {
             return (
               <FoodList
                 key={list.id}
-                id={0}
+                id={list.id}
                 deleteFoodList={handleClickDeleteFoodList}
               />
             );

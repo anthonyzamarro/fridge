@@ -12,11 +12,14 @@ interface FoodItemProps {
   [key: string]: any;
 }
 
+const ls = Object.keys(localStorage).map((key) => localStorage[key]);
+console.log(ls);
+
 const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
   const [foodListTitleUpdated, setFoodListTitleUpdated] =
     useState<string>('Food List');
-  const [foodListData, setFoodListData] = useState<object[]>([]);
+  const [foodListData, setFoodListData] = useState<object[]>(ls);
 
   const handleChangeUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodListTitle(e.target.value);
@@ -77,8 +80,9 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       </form>
       <Form handleForm={handleAddFoodListItem} />
       {foodListData.map((food: FoodItemProps) => {
+        console.log(food);
         return (
-          <li key={food.id}>
+          <li key={food.id} id={`${food.id}`}>
             <FoodItem
               id={food.id}
               name={food.name}
