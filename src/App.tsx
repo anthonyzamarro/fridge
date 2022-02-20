@@ -40,8 +40,10 @@ export const App = () => {
       localStorage.setItem(
         `${foodId}`,
         JSON.stringify({
-          id: foodId,
-          foods: foodList.filter(({ list }) => list.id === foodId),
+          list: {
+            id: foodId,
+            foods: foodList.filter(({ list }) => list.id === foodId),
+          },
         })
       );
     } else {
@@ -69,7 +71,7 @@ export const App = () => {
     //   setFoodList([{ list: { id: parseInt(key), foods: localStorage[key] } }]);
     // });
     // console.log(foodList, foods);
-    setFoodList([...foods]);
+    setFoodList(foods);
     // console.log(localStorage);
   };
 

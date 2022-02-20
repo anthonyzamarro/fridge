@@ -17,8 +17,7 @@ console.log(ls);
 
 const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
-  const [foodListTitleUpdated, setFoodListTitleUpdated] =
-    useState<string>('Food List');
+  const [foodListTitleUpdated, setFoodListTitleUpdated] = useState<string>();
   const [foodListData, setFoodListData] = useState<object[]>(ls);
 
   const handleChangeUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,9 +26,11 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
 
   const handleClickUpdateTitle = (newTitle: string) => {
     setFoodListTitleUpdated(newTitle);
+    // console.log(localStorage.getItem(id.toString()));
   };
 
   const handleAddFoodListItem = (newFoodListData: FoodListProps) => {
+    console.log(foodListData, newFoodListData);
     setFoodListData([
       ...foodListData,
       {
@@ -50,10 +51,15 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   // };
 
   useEffect(() => {
-    localStorage.setItem(
-      id.toString(),
-      JSON.stringify({ title: foodListTitleUpdated, ...foodListData })
-    );
+    // console.log(foodListData, id);
+    // localStorage.setItem(
+    //   id.toString(),
+    //   JSON.stringify({
+    //     title: foodListTitleUpdated,
+    //     foodListData,
+    //   })
+    // );
+    // localStorage.setItem(id.toString(), JSON.stringify(foodListData));
   }, [foodListData, foodListTitleUpdated, id]);
 
   return (
@@ -80,7 +86,6 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       </form>
       <Form handleForm={handleAddFoodListItem} />
       {foodListData.map((food: FoodItemProps) => {
-        console.log(food);
         return (
           <li key={food.id} id={`${food.id}`}>
             <FoodItem
