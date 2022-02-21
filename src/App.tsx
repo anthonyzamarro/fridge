@@ -9,12 +9,12 @@ interface FoodListProps {
   foods: object[];
 }
 
-interface FoodListArrayProps {
-  list: FoodListProps;
-}
+// interface FoodListArrayProps {
+//   list: FoodListProps;
+// }
 
 export const App = () => {
-  const [foodList, setFoodList] = useState<FoodListArrayProps[]>([]);
+  const [foodList, setFoodList] = useState<FoodListProps[]>([]);
 
   const handleClickAddFoodList = () => {
     if (localStorage.length) {
@@ -28,51 +28,40 @@ export const App = () => {
         setFoodList([
           ...foodList,
           {
-            list: {
-              id: foodId,
-              foods: localStorage[key],
-            },
+            id: foodId,
+            foods: localStorage[key],
           },
         ]);
       });
+      console.log(
+        foodList,
+        foodList.filter(({ id }) => id === foodId)
+      );
 
       // update localstorage with new item
       localStorage.setItem(
-        `${foodId}`,
+        foodId.toString(),
         JSON.stringify({
-          list: {
-            id: foodId,
-            foods: foodList.filter(({ list }) => list.id === foodId),
-          },
+          foods: foodList.filter(({ id }) => id === foodId),
         })
       );
     } else {
       setFoodList([
         {
-          list: {
-            id: 0,
-            foods: [],
-          },
+          id: 0,
+          foods: [],
         },
       ]);
 
-      localStorage.setItem(
-        `${0}`,
-        JSON.stringify({ list: { id: 0, foods: [] } })
-      );
+      localStorage.setItem(`${0}`, JSON.stringify({ foods: [] }));
     }
   };
 
   const updateFoodList = () => {
     const foods = Object.keys(localStorage).map((key) => {
-      return { list: { id: parseInt(key), foods: localStorage[key] } };
+      return { id: parseInt(key), foods: localStorage[key] };
     });
-    // Object.keys(localStorage).forEach((key) => {
-    //   setFoodList([{ list: { id: parseInt(key), foods: localStorage[key] } }]);
-    // });
-    // console.log(foodList, foods);
     setFoodList(foods);
-    // console.log(localStorage);
   };
 
   const handleClickDeleteFoodList = (foodId: number) => {
@@ -99,11 +88,11 @@ export const App = () => {
 
       <div className="food-list__container">
         {foodList.length > 0 &&
-          foodList.map(({ list }) => {
+          foodList.map(({ id }) => {
             return (
               <FoodList
-                key={list.id}
-                id={list.id}
+                key={id}
+                id={id}
                 deleteFoodList={handleClickDeleteFoodList}
               />
             );

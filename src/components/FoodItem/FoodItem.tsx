@@ -22,7 +22,7 @@ const FoodItem = ({
   return (
     <div key={id}>
       <label htmlFor={'foodName'}>
-        <p>Food Name:</p>
+        <p>Food Name: {name}</p>
         <input type="text" name={name} id={name} defaultValue={name} />
       </label>
       <label htmlFor={'foodGroup'}>
