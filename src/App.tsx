@@ -33,17 +33,15 @@ export const App = () => {
           },
         ]);
       });
-      console.log(
-        foodList,
-        foodList.filter(({ id }) => id === foodId)
-      );
+      // console.log(
+      //   foodList,
+      //   foodList.filter(({ id }) => id === foodId)
+      // );
 
       // update localstorage with new item
       localStorage.setItem(
         foodId.toString(),
-        JSON.stringify({
-          foods: foodList.filter(({ id }) => id === foodId),
-        })
+        JSON.stringify(foodList.filter(({ id }) => id === foodId))
       );
     } else {
       setFoodList([
@@ -53,7 +51,7 @@ export const App = () => {
         },
       ]);
 
-      localStorage.setItem(`${0}`, JSON.stringify({ foods: [] }));
+      localStorage.setItem(`${0}`, JSON.stringify([]));
     }
   };
 

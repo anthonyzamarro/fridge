@@ -12,15 +12,15 @@ interface FoodItemProps {
   [key: string]: any;
 }
 
-// const ls = Object.keys(localStorage).map((key) => localStorage[key]);
-// console.log('first render', ls);
-
 const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
   const [foodListTitleUpdated, setFoodListTitleUpdated] = useState<string>();
   const [foodListData, setFoodListData] = useState<object[]>(
-    JSON.parse(localStorage[0])
+    JSON.parse(JSON.stringify(localStorage)) || [{}]
   );
+  // const [foodListData, setFoodListData] = useState<object[]>(
+  //   JSON.parse(localStorage[0])
+  // );
 
   const handleChangeUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodListTitle(e.target.value);
@@ -51,11 +51,30 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     //   console.log(storedFoodList);
     //   setFoodListData(foodListData.concat(newFoodListData));
     // }
-    console.log(foodListData.concat(newFoodListData));
-    setFoodListData(foodListData.concat(newFoodListData));
+    // Object.keys(foodListData).forEach(() => {
+    //   setFoodListData([foodListData].concat(newFoodListData));
+    // });
+    // setFoodListData([foodListData].concat([newFoodListData]));
+    // parsedList.push(newFoodListData);
+    // setFoodListData([
+    //   ...JSON.parse(foodListData[id].toString()),
+    //   newFoodListData,
+    // ]);
+    // console.log(
+    //   [...JSON.parse(foodListData[id].toString()), newFoodListData],
+    //   id
+    // );
+    const parsedList = JSON.parse(foodListData[id].toString());
+    Object.keys(parsedList).forEach((food: any) => {
+      console.log(parsedList[food], food);
+    });
+    // console.log(foodListData[id].concat(newFoodListData));
     localStorage.setItem(
       id.toString(),
-      JSON.stringify(foodListData.concat(newFoodListData))
+      JSON.stringify([
+        ...JSON.parse(foodListData[id].toString()),
+        newFoodListData,
+      ])
     );
   };
 
@@ -71,7 +90,6 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   // };
 
   useEffect(() => {
-    // console.log(foodListData, id);
     // localStorage.setItem(
     //   id.toString(),
     //   JSON.stringify({
@@ -80,7 +98,6 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     //   })
     // );
     // const getFoodItemId = foodListData.map((food: FoodItemProps) => food.id);
-    // console.log(foodListData, getFoodItemId);
     // localStorage.setItem(
     //   id.toString(),
     //   JSON.stringify({
@@ -113,7 +130,8 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
         />
       </form>
       <Form handleForm={handleAddFoodListItem} />
-      {foodListData.map((food: FoodItemProps) => {
+      {[foodListData].map((food: FoodItemProps) => {
+        // console.log(foodListData);
         return (
           <li key={`${id}-${food.id}-${food.name}`} id={`${food.list?.id}`}>
             <FoodItem
