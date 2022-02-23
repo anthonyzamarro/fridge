@@ -1,5 +1,4 @@
-// import { useState } from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FoodItem from '../FoodItem/FoodItem';
 import Form from '../Form/Form';
 
@@ -12,12 +11,17 @@ interface FoodItemProps {
   [key: string]: any;
 }
 
+// const ls = JSON.parse(JSON.stringify(localStorage));
+const ls = Object.keys(localStorage).map((key) => localStorage[key]);
+console.log('ls:', ls);
+
 const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
-  const [foodListTitleUpdated, setFoodListTitleUpdated] = useState<string>();
-  const [foodListData, setFoodListData] = useState<object[]>(
-    JSON.parse(JSON.stringify(localStorage)) || [{}]
-  );
+  const [, setFoodListTitleUpdated] = useState<string>();
+  const [foodListData, setFoodListData] = useState<object[]>(ls);
+  // const [foodListData, setFoodListData] = useState<object[]>(
+  //   JSON.parse(JSON.stringify(localStorage)) || [{}]
+  // );
   // const [foodListData, setFoodListData] = useState<object[]>(
   //   JSON.parse(localStorage[0])
   // );
@@ -64,17 +68,12 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     //   [...JSON.parse(foodListData[id].toString()), newFoodListData],
     //   id
     // );
-    const parsedList = JSON.parse(foodListData[id].toString());
-    Object.keys(parsedList).forEach((food: any) => {
-      console.log(parsedList[food], food);
-    });
-    // console.log(foodListData[id].concat(newFoodListData));
+    console.log('original:', foodListData);
+    const parsedList = JSON.parse(JSON.stringify(foodListData));
+    setFoodListData([...parsedList, newFoodListData]);
     localStorage.setItem(
       id.toString(),
-      JSON.stringify([
-        ...JSON.parse(foodListData[id].toString()),
-        newFoodListData,
-      ])
+      JSON.stringify([...parsedList, newFoodListData])
     );
   };
 
@@ -88,24 +87,6 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   // const handleClickDeleteFoodList = (foodId: number) => {
   //   localStorage.removeItem(foodId.toString());
   // };
-
-  useEffect(() => {
-    // localStorage.setItem(
-    //   id.toString(),
-    //   JSON.stringify({
-    //     title: foodListTitleUpdated,
-    //     foodListData,
-    //   })
-    // );
-    // const getFoodItemId = foodListData.map((food: FoodItemProps) => food.id);
-    // localStorage.setItem(
-    //   id.toString(),
-    //   JSON.stringify({
-    //     title: foodListTitleUpdated,
-    //     foodListData,
-    //   })
-    // );
-  }, [foodListData, foodListTitleUpdated, id]);
 
   return (
     <div key={id} className={`food-list ${id}`}>
