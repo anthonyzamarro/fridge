@@ -47,6 +47,10 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
 
   useEffect(() => {
     if (localStorage.length) {
+      /**
+       * since we have nested localstate data, we need to initialize the food list's data
+       * inside of useEffect and pass the food list id to get its specific list data
+       */
       setFoodListData(JSON.parse(localStorage[id]));
     }
   }, []);
