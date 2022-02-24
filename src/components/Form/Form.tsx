@@ -5,10 +5,11 @@ import { dateFormat } from '../../utils/dateFormat';
 import { FoodListProps } from '../FoodList/FoodList';
 
 interface FormProps {
+  listId: number;
   handleForm: (val: FoodListProps) => void;
 }
 
-const Form = ({ handleForm }: FormProps) => {
+const Form = ({ handleForm, listId }: FormProps) => {
   const [foodName, setFoodName] = useState('');
   const [foodGroup, setFoodGroup] = useState('');
   const [foodExpiration, setFoodExpiration] = useState('');
@@ -33,8 +34,31 @@ const Form = ({ handleForm }: FormProps) => {
     setFoodPrice(parseInt(e.target.value));
   };
 
+  const updateFoodId = () => {
+    if (localStorage.length) {
+      const foodList = JSON.parse(
+        localStorage.getItem(listId.toString()) as string
+      );
+      if (foodList.length) {
+        const ids = Object.keys(foodList).map((key) => foodList[key].id);
+        const lastId = ids.sort()[ids.length - 1];
+        console.log('lastId:', lastId);
+        console.log('ids:', ids);
+        if (parseInt(lastId) > 1) {
+          setFoodId(parseInt(lastId) + foodId);
+        } else {
+          setFoodId(foodId + 1);
+        }
+      } else {
+        setFoodId(foodId + 1);
+      }
+      console.log('foodId:', foodId);
+    }
+  };
+
   const submitFormData = () => {
-    setFoodId(foodId + 1);
+    updateFoodId();
+    // setFoodId(foodId + 1);
     handleForm({
       name: foodName,
       group: foodGroup,

@@ -26,8 +26,9 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
 
   const handleAddFoodListItem = (newFoodListData: FoodListProps) => {
     const parsedList = JSON.parse(JSON.stringify(foodListData));
+    // const uniqueIds = parsedList.map((item: FoodListProps) => item.id);
+    // console.log('parsed:', parsedList, 'uniqueIds', uniqueIds);
     setFoodListData([...parsedList, newFoodListData]);
-    console.log('original:', [...parsedList, newFoodListData]);
     localStorage.setItem(
       id.toString(),
       JSON.stringify([...parsedList, newFoodListData])
@@ -77,11 +78,11 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
           onClick={() => handleClickUpdateTitle(foodListTitle)}
         />
       </form>
-      <Form handleForm={handleAddFoodListItem} />
+      <Form handleForm={handleAddFoodListItem} listId={id} />
       {foodListData &&
         foodListData.map((food: FoodItemProps) => {
           return (
-            <li key={`${food.id}`}>
+            <li key={`${id}-${food.id}`}>
               <FoodItem
                 id={food.id}
                 name={food.name}
