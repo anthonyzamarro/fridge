@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // utils functions
 import { dateFormat } from '../../utils/dateFormat';
 // props
@@ -34,7 +34,7 @@ const Form = ({ handleForm, listId }: FormProps) => {
     setFoodPrice(parseInt(e.target.value));
   };
 
-  const updateFoodId = () => {
+  useEffect(() => {
     if (localStorage.length) {
       const foodList = JSON.parse(
         localStorage.getItem(listId.toString()) as string
@@ -42,23 +42,13 @@ const Form = ({ handleForm, listId }: FormProps) => {
       if (foodList.length) {
         const ids = Object.keys(foodList).map((key) => foodList[key].id);
         const lastId = ids.sort()[ids.length - 1];
-        console.log('lastId:', lastId);
-        console.log('ids:', ids);
-        if (parseInt(lastId) > 1) {
-          setFoodId(parseInt(lastId) + foodId);
-        } else {
-          setFoodId(foodId + 1);
-        }
-      } else {
-        setFoodId(foodId + 1);
+        setFoodId(lastId + 1);
       }
-      console.log('foodId:', foodId);
     }
-  };
+  }, []);
 
   const submitFormData = () => {
-    updateFoodId();
-    // setFoodId(foodId + 1);
+    setFoodId(foodId + 1);
     handleForm({
       name: foodName,
       group: foodGroup,
