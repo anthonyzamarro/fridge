@@ -26,8 +26,6 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
 
   const handleAddFoodListItem = (newFoodListData: FoodListProps) => {
     const parsedList = JSON.parse(JSON.stringify(foodListData));
-    // const uniqueIds = parsedList.map((item: FoodListProps) => item.id);
-    // console.log('parsed:', parsedList, 'uniqueIds', uniqueIds);
     setFoodListData([...parsedList, newFoodListData]);
     localStorage.setItem(
       id.toString(),
@@ -40,11 +38,8 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       (food: FoodItemProps) => food.id !== foodId
     );
     setFoodListData([...updatedList]);
+    localStorage.setItem(id.toString(), JSON.stringify([...updatedList]));
   };
-
-  // const handleClickDeleteFoodList = (foodId: number) => {
-  //   localStorage.removeItem(foodId.toString());
-  // };
 
   useEffect(() => {
     if (localStorage.length) {

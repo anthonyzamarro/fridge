@@ -39,6 +39,8 @@ const Form = ({ handleForm, listId }: FormProps) => {
       const foodList = JSON.parse(
         localStorage.getItem(listId.toString()) as string
       );
+      // on first render, get most recently added food item id and add one to it
+      // this is to prevent duplicate keys in nested food lists
       if (foodList.length) {
         const ids = Object.keys(foodList).map((key) => foodList[key].id);
         const lastId = ids.sort()[ids.length - 1];
