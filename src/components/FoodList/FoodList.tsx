@@ -37,6 +37,7 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     const updatedList = foodListData.filter(
       (food: FoodItemProps) => food.id !== foodId
     );
+    console.log(updatedList);
     setFoodListData([...updatedList]);
     localStorage.setItem(id.toString(), JSON.stringify([...updatedList]));
   };
@@ -83,25 +84,28 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       <Form handleForm={handleAddFoodListItem} listId={id} />
       <h2>{foodListData[0] && foodListData[0].title}</h2>
       <ul>
-        {foodListData &&
-          foodListData.map((food: FoodItemProps) => {
-            return (
-              <li key={`${id}-${food.id}`}>
-                <FoodItem
-                  id={food.id}
-                  name={food.name}
-                  expiration={food.expiration}
-                  group={food.group}
-                  price={food.price}
-                  deleteFoodFromList={handleClickDeleteFoodListItem}
-                  // updateFoodName={handleChangeFoodName}
-                  // updateFoodGroup={handleChangeFoodGroup}
-                  // updateFoodExpiration={handleChangeFoodExpiration}
-                  // updateFoodPrice={handleChangeFoodPrice}
-                />
-              </li>
-            );
-          })}
+        {foodListData.map((food: FoodItemProps) => {
+          {
+            if (food.id > 0) {
+              return (
+                <li key={`${id}-${food.id}`}>
+                  <FoodItem
+                    id={food.id}
+                    name={food.name}
+                    expiration={food.expiration}
+                    group={food.group}
+                    price={food.price}
+                    deleteFoodFromList={handleClickDeleteFoodListItem}
+                    // updateFoodName={handleChangeFoodName}
+                    // updateFoodGroup={handleChangeFoodGroup}
+                    // updateFoodExpiration={handleChangeFoodExpiration}
+                    // updateFoodPrice={handleChangeFoodPrice}
+                  />
+                </li>
+              );
+            }
+          }
+        })}
       </ul>
     </div>
   );
