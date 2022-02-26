@@ -84,9 +84,9 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       <Form handleForm={handleAddFoodListItem} listId={id} />
       <h2>{foodListData[0] && foodListData[0].title}</h2>
       <ul>
-        {foodListData.map((food: FoodItemProps) => {
+        {foodListData.map((food: FoodItemProps, index: number) => {
           {
-            if (food.id > 0) {
+            if (index > 0) {
               return (
                 <li key={`${id}-${food.id}`}>
                   <FoodItem
