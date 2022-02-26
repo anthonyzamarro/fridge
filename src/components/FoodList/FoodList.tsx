@@ -13,7 +13,6 @@ interface FoodItemProps {
 
 const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
-  const [, setFoodListTitleUpdated] = useState<string>();
   const [foodListData, setFoodListData] = useState<FoodItemProps[]>([]);
 
   const handleChangeUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +20,16 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   };
 
   const handleClickUpdateTitle = (newTitle: string) => {
-    setFoodListTitleUpdated(newTitle);
+    const newListWithNewTitle = foodListData.map((food) => {
+      if (food.title) {
+        return Object.assign(food, { title: newTitle });
+      }
+      return food;
+    });
+    setFoodListData(newListWithNewTitle);
+    if (localStorage.length) {
+      localStorage.setItem(id.toString(), JSON.stringify(newListWithNewTitle));
+    }
   };
 
   const handleAddFoodListItem = (newFoodListData: FoodListProps) => {
@@ -37,7 +45,6 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     const updatedList = foodListData.filter(
       (food: FoodItemProps) => food.id !== foodId
     );
-    console.log(updatedList);
     setFoodListData([...updatedList]);
     localStorage.setItem(id.toString(), JSON.stringify([...updatedList]));
   };
@@ -86,6 +93,8 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       <ul>
         {foodListData.map((food: FoodItemProps, index: number) => {
           {
+            // 0th index is always the title of the list. returning the list including the 0th index
+            // will result in the title being deleted if the first list item is deleted
             if (index > 0) {
               return (
                 <li key={`${id}-${food.id}`}>
