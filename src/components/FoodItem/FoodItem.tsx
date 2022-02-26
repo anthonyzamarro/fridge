@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 export interface FoodItemProps {
   name: string;
   expiration: string;
@@ -5,7 +7,7 @@ export interface FoodItemProps {
   id: number;
   price?: number;
   deleteFoodFromList: (id: number) => void;
-  // updateFoodName: (name: string) => void;
+  updateFoodName: (name: string, id: number) => void;
   // updateFoodGroup: (group: string) => void;
   // updateFoodExpiration: (expiration: string) => void;
   // updateFoodPrice: (price: number) => void;
@@ -18,18 +20,25 @@ const FoodItem = ({
   price,
   id,
   deleteFoodFromList,
-}: // updateFoodName,
+  updateFoodName,
+}: //
 // updateFoodGroup,
 // updateFoodExpiration,
 // updateFoodPrice,
 FoodItemProps) => {
+  const [foodName, setFoodName] = useState<string>(name);
   const handleClickDeleteFoodItem = () => {
     deleteFoodFromList(id);
   };
 
-  // const handleUpdateFoodName = () => {
-  //   console.log('balh', name);
-  // };
+  const handleChangeSetFoodName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFoodName(e.target.value);
+  };
+
+  const handleClickFoodName = (name: string) => {
+    updateFoodName(name, id);
+    setFoodName(name);
+  };
 
   return (
     <div key={id}>
@@ -37,12 +46,14 @@ FoodItemProps) => {
         <p>Food Name: {name}</p>
         <input
           type="text"
-          name={name}
-          id={name}
-          defaultValue={name}
-          // onChange={handleUpdateFoodName}
+          name={foodName}
+          id={foodName}
+          defaultValue={foodName}
+          onChange={handleChangeSetFoodName}
         />
-        {/* <button onClick={handleUpdateFoodName}>Update food name</button> */}
+        <button onClick={() => handleClickFoodName(foodName)}>
+          Update food name
+        </button>
       </label>
       <label htmlFor={'foodGroup'}>
         <p>Food Group:</p>

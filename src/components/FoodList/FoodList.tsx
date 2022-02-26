@@ -49,9 +49,21 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     localStorage.setItem(id.toString(), JSON.stringify([...updatedList]));
   };
 
-  // const handleChangeFoodName = (foodName: string) => {
-  //   console.log('change name', foodName);
-  // };
+  const handleChangeFoodName = (foodName: string, foodId: number) => {
+    const updatedFoodName = foodListData.map((food) => {
+      if (food.id === foodId) {
+        return {
+          ...food,
+          name: foodName,
+        };
+      }
+      return food;
+    });
+    setFoodListData([...updatedFoodName]);
+    if (localStorage.length) {
+      localStorage.setItem(id.toString(), JSON.stringify(updatedFoodName));
+    }
+  };
   // const handleChangeFoodGroup = () => {};
   // const handleChangeFoodExpiration = () => {};
   // const handleChangeFoodPrice = () => {};
@@ -88,6 +100,7 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
           onClick={() => handleClickUpdateTitle(foodListTitle)}
         />
       </form>
+      <h2>Add New Food Item</h2>
       <Form handleForm={handleAddFoodListItem} listId={id} />
       <h2>{foodListData[0] && foodListData[0].title}</h2>
       <ul>
@@ -105,7 +118,7 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
                     group={food.group}
                     price={food.price}
                     deleteFoodFromList={handleClickDeleteFoodListItem}
-                    // updateFoodName={handleChangeFoodName}
+                    updateFoodName={handleChangeFoodName}
                     // updateFoodGroup={handleChangeFoodGroup}
                     // updateFoodExpiration={handleChangeFoodExpiration}
                     // updateFoodPrice={handleChangeFoodPrice}
