@@ -29,29 +29,31 @@ export const App = () => {
           ...foodList,
           {
             id: foodId,
-            foods: localStorage[key],
+            foods: [
+              { title: `food list ${foodId}`, id: foodId },
+              ...localStorage[key],
+            ],
           },
         ]);
       });
-      // console.log(
-      //   foodList,
-      //   foodList.filter(({ id }) => id === foodId)
-      // );
-
+      const storedFoods = [
+        { title: `food list ${foodId}`, id: foodId },
+        ...foodList.filter(({ id }) => id === foodId),
+      ];
       // update localstorage with new item
-      localStorage.setItem(
-        foodId.toString(),
-        JSON.stringify(foodList.filter(({ id }) => id === foodId))
-      );
+      localStorage.setItem(foodId.toString(), JSON.stringify(storedFoods));
     } else {
       setFoodList([
         {
           id: 0,
-          foods: [],
+          foods: [{ title: `food list ${0}`, id: 0 }],
         },
       ]);
 
-      localStorage.setItem(`${0}`, JSON.stringify([]));
+      localStorage.setItem(
+        `${0}`,
+        JSON.stringify([{ title: `food list ${0}`, id: `${0}` }])
+      );
     }
   };
 

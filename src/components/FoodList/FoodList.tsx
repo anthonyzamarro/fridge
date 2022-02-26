@@ -14,7 +14,7 @@ interface FoodItemProps {
 const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
   const [, setFoodListTitleUpdated] = useState<string>();
-  const [foodListData, setFoodListData] = useState<object[]>([]);
+  const [foodListData, setFoodListData] = useState<FoodItemProps[]>([]);
 
   const handleChangeUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodListTitle(e.target.value);
@@ -40,6 +40,13 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     setFoodListData([...updatedList]);
     localStorage.setItem(id.toString(), JSON.stringify([...updatedList]));
   };
+
+  // const handleChangeFoodName = (foodName: string) => {
+  //   console.log('change name', foodName);
+  // };
+  // const handleChangeFoodGroup = () => {};
+  // const handleChangeFoodExpiration = () => {};
+  // const handleChangeFoodPrice = () => {};
 
   useEffect(() => {
     if (localStorage.length) {
@@ -74,21 +81,28 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
         />
       </form>
       <Form handleForm={handleAddFoodListItem} listId={id} />
-      {foodListData &&
-        foodListData.map((food: FoodItemProps) => {
-          return (
-            <li key={`${id}-${food.id}`}>
-              <FoodItem
-                id={food.id}
-                name={food.name}
-                expiration={food.expiration}
-                group={food.group}
-                price={food.price}
-                deleteFoodFromList={handleClickDeleteFoodListItem}
-              />
-            </li>
-          );
-        })}
+      <h2>{foodListData[0] && foodListData[0].title}</h2>
+      <ul>
+        {foodListData &&
+          foodListData.map((food: FoodItemProps) => {
+            return (
+              <li key={`${id}-${food.id}`}>
+                <FoodItem
+                  id={food.id}
+                  name={food.name}
+                  expiration={food.expiration}
+                  group={food.group}
+                  price={food.price}
+                  deleteFoodFromList={handleClickDeleteFoodListItem}
+                  // updateFoodName={handleChangeFoodName}
+                  // updateFoodGroup={handleChangeFoodGroup}
+                  // updateFoodExpiration={handleChangeFoodExpiration}
+                  // updateFoodPrice={handleChangeFoodPrice}
+                />
+              </li>
+            );
+          })}
+      </ul>
     </div>
   );
 };

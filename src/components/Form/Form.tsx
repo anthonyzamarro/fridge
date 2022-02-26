@@ -14,7 +14,7 @@ const Form = ({ handleForm, listId }: FormProps) => {
   const [foodGroup, setFoodGroup] = useState('');
   const [foodExpiration, setFoodExpiration] = useState('');
   const [foodPrice, setFoodPrice] = useState(0);
-  const [foodId, setFoodId] = useState(0);
+  const [foodId, setFoodId] = useState(1);
 
   const handleChangeFoodName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodName(e.target.value);
@@ -44,7 +44,7 @@ const Form = ({ handleForm, listId }: FormProps) => {
       if (foodList.length) {
         const ids = Object.keys(foodList).map((key) => foodList[key].id);
         const lastId = ids.sort()[ids.length - 1];
-        setFoodId(lastId + 1);
+        setFoodId(parseInt(lastId) + 1);
       }
     }
   }, []);
