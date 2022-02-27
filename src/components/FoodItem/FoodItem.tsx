@@ -8,9 +8,9 @@ export interface FoodItemProps {
   price?: number;
   deleteFoodFromList: (id: number) => void;
   updateFoodName: (name: string, id: number) => void;
-  // updateFoodGroup: (group: string) => void;
-  // updateFoodExpiration: (expiration: string) => void;
-  // updateFoodPrice: (price: number) => void;
+  updateFoodGroup: (group: string, id: number) => void;
+  updateFoodExpiration: (expiration: string, id: number) => void;
+  updateFoodPrice: (price: number, id: number) => void;
 }
 
 const FoodItem = ({
@@ -21,12 +21,16 @@ const FoodItem = ({
   id,
   deleteFoodFromList,
   updateFoodName,
+  updateFoodGroup,
+  updateFoodExpiration,
+  updateFoodPrice,
 }: //
-// updateFoodGroup,
-// updateFoodExpiration,
-// updateFoodPrice,
 FoodItemProps) => {
   const [foodName, setFoodName] = useState<string>(name);
+  const [foodGroup, setFoodGroup] = useState<string>(group);
+  const [foodExpiration, setFoodExpiration] = useState<string>(expiration);
+  const [foodPrice, setFoodPrice] = useState<number>(price as number);
+
   const handleClickDeleteFoodItem = () => {
     deleteFoodFromList(id);
   };
@@ -35,9 +39,34 @@ FoodItemProps) => {
     setFoodName(e.target.value);
   };
 
-  const handleClickFoodName = (name: string) => {
+  const handleClickUpdateFoodName = (name: string) => {
     updateFoodName(name, id);
-    setFoodName(name);
+  };
+
+  const handleChangeSetFoodGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFoodGroup(e.target.value);
+  };
+
+  const handleClickUpdateFoodGroup = (group: string) => {
+    updateFoodGroup(group, id);
+  };
+
+  const handleChangeSetFoodExpiration = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFoodExpiration(e.target.value);
+  };
+
+  const handleClickUpdateFoodExpiration = (expiration: string) => {
+    updateFoodExpiration(expiration, id);
+  };
+
+  const handleChangeSetFoodPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFoodPrice(parseInt(e.target.value));
+  };
+
+  const handleClickUpdateFoodPrice = (price: number) => {
+    updateFoodPrice(price, id);
   };
 
   return (
@@ -51,36 +80,48 @@ FoodItemProps) => {
           defaultValue={foodName}
           onChange={handleChangeSetFoodName}
         />
-        <button onClick={() => handleClickFoodName(foodName)}>
+        <button onClick={() => handleClickUpdateFoodName(foodName)}>
           Update food name
         </button>
       </label>
       <label htmlFor={'foodGroup'}>
-        <p>Food Group:</p>
-        <input type="text" name={group} id={group} defaultValue={group} />
-        {/* <button onClick={updateFoodGroup}>Update food group</button> */}
+        <p>Food Group: {group}</p>
+        <input
+          type="text"
+          name={foodGroup}
+          id={foodGroup}
+          defaultValue={foodGroup}
+          onChange={handleChangeSetFoodGroup}
+        />
+        <button onClick={() => handleClickUpdateFoodGroup(foodGroup)}>
+          Update food group
+        </button>
       </label>
       <label htmlFor={'foodExpiration'}>
-        <p>Expiration Date:</p>
+        <p>Expiration Date: {expiration}</p>
         <input
           type="date"
-          name={expiration}
-          id={expiration}
-          defaultValue={expiration}
+          name={foodExpiration}
+          id={foodExpiration}
+          defaultValue={foodExpiration}
+          onChange={handleChangeSetFoodExpiration}
         />
-        {/* <button onClick={updateFoodExpiration}>
+        <button onClick={() => handleClickUpdateFoodExpiration(foodExpiration)}>
           Update food expiration date
-        </button> */}
+        </button>
       </label>
       <label htmlFor={'foodPrice'}>
-        <p>Price:</p>
+        <p>Price: {price}</p>
         <input
           type="number"
-          name={price?.toString()}
-          id={price?.toString()}
-          defaultValue={price}
+          name={foodPrice?.toString()}
+          id={foodPrice?.toString()}
+          defaultValue={foodPrice}
+          onChange={handleChangeSetFoodPrice}
         />
-        {/* <button onClick={updateFoodPrice}>Update food price</button> */}
+        <button onClick={() => handleClickUpdateFoodPrice(foodPrice)}>
+          Update food price
+        </button>
       </label>
       <br />
       <button onClick={handleClickDeleteFoodItem}>Delete food item</button>

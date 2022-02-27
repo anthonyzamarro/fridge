@@ -64,9 +64,57 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       localStorage.setItem(id.toString(), JSON.stringify(updatedFoodName));
     }
   };
-  // const handleChangeFoodGroup = () => {};
-  // const handleChangeFoodExpiration = () => {};
-  // const handleChangeFoodPrice = () => {};
+  const handleChangeFoodGroup = (foodGroup: string, foodId: number) => {
+    const updatedFoodGroup = foodListData.map((food) => {
+      if (food.id === foodId) {
+        return {
+          ...food,
+          group: foodGroup,
+        };
+      }
+      return food;
+    });
+    setFoodListData([...updatedFoodGroup]);
+    if (localStorage.length) {
+      localStorage.setItem(id.toString(), JSON.stringify(updatedFoodGroup));
+    }
+  };
+  const handleChangeFoodExpiration = (
+    foodExpiration: string,
+    foodId: number
+  ) => {
+    const updatedFoodExpiration = foodListData.map((food) => {
+      if (food.id === foodId) {
+        return {
+          ...food,
+          expiration: foodExpiration,
+        };
+      }
+      return food;
+    });
+    setFoodListData([...updatedFoodExpiration]);
+    if (localStorage.length) {
+      localStorage.setItem(
+        id.toString(),
+        JSON.stringify(updatedFoodExpiration)
+      );
+    }
+  };
+  const handleChangeFoodPrice = (foodPrice: number, foodId: number) => {
+    const updatedFoodPrice = foodListData.map((food) => {
+      if (food.id === foodId) {
+        return {
+          ...food,
+          price: foodPrice,
+        };
+      }
+      return food;
+    });
+    setFoodListData([...updatedFoodPrice]);
+    if (localStorage.length) {
+      localStorage.setItem(id.toString(), JSON.stringify(updatedFoodPrice));
+    }
+  };
 
   useEffect(() => {
     if (localStorage.length) {
@@ -119,9 +167,9 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
                     price={food.price}
                     deleteFoodFromList={handleClickDeleteFoodListItem}
                     updateFoodName={handleChangeFoodName}
-                    // updateFoodGroup={handleChangeFoodGroup}
-                    // updateFoodExpiration={handleChangeFoodExpiration}
-                    // updateFoodPrice={handleChangeFoodPrice}
+                    updateFoodGroup={handleChangeFoodGroup}
+                    updateFoodExpiration={handleChangeFoodExpiration}
+                    updateFoodPrice={handleChangeFoodPrice}
                   />
                 </li>
               );
