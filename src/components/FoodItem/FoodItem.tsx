@@ -34,38 +34,26 @@ const FoodItem = ({
     deleteFoodFromList(id);
   };
 
-  const handleChangeSetFoodName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFoodName(e.target.value);
-  };
-
-  const handleClickUpdateFoodName = (name: string) => {
-    updateFoodName(name, id);
-  };
-
-  const handleChangeSetFoodGroup = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFoodGroup(e.target.value);
-  };
-
-  const handleClickUpdateFoodGroup = (group: string) => {
-    updateFoodGroup(group, id);
-  };
-
-  const handleChangeSetFoodExpiration = (
-    e: React.ChangeEvent<HTMLInputElement>
+  const handleChangeUpdateFoodValues = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: string
   ) => {
-    setFoodExpiration(e.target.value);
-  };
-
-  const handleClickUpdateFoodExpiration = (expiration: string) => {
-    updateFoodExpiration(expiration, id);
-  };
-
-  const handleChangeSetFoodPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFoodPrice(parseInt(e.target.value));
-  };
-
-  const handleClickUpdateFoodPrice = (price: number) => {
-    updateFoodPrice(price, id);
+    switch (type) {
+      case 'name':
+        setFoodName(e.target.value);
+        break;
+      case 'group':
+        setFoodGroup(e.target.value);
+        break;
+      case 'expiration':
+        setFoodExpiration(e.target.value);
+        break;
+      case 'price':
+        setFoodPrice(parseInt(e.target.value));
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -77,9 +65,9 @@ const FoodItem = ({
           name={foodName}
           id={foodName}
           defaultValue={foodName}
-          onChange={handleChangeSetFoodName}
+          onChange={(e) => handleChangeUpdateFoodValues(e, 'name')}
         />
-        <button onClick={() => handleClickUpdateFoodName(foodName)}>
+        <button onClick={() => updateFoodName(foodName, id)}>
           Update food name
         </button>
       </label>
@@ -90,9 +78,9 @@ const FoodItem = ({
           name={foodGroup}
           id={foodGroup}
           defaultValue={foodGroup}
-          onChange={handleChangeSetFoodGroup}
+          onChange={(e) => handleChangeUpdateFoodValues(e, 'group')}
         />
-        <button onClick={() => handleClickUpdateFoodGroup(foodGroup)}>
+        <button onClick={() => updateFoodGroup(foodGroup, id)}>
           Update food group
         </button>
       </label>
@@ -103,9 +91,9 @@ const FoodItem = ({
           name={foodExpiration}
           id={foodExpiration}
           defaultValue={foodExpiration}
-          onChange={handleChangeSetFoodExpiration}
+          onChange={(e) => handleChangeUpdateFoodValues(e, 'expiration')}
         />
-        <button onClick={() => handleClickUpdateFoodExpiration(foodExpiration)}>
+        <button onClick={() => updateFoodExpiration(foodExpiration, id)}>
           Update food expiration date
         </button>
       </label>
@@ -116,9 +104,9 @@ const FoodItem = ({
           name={foodPrice?.toString()}
           id={foodPrice?.toString()}
           defaultValue={foodPrice}
-          onChange={handleChangeSetFoodPrice}
+          onChange={(e) => handleChangeUpdateFoodValues(e, 'price')}
         />
-        <button onClick={() => handleClickUpdateFoodPrice(foodPrice)}>
+        <button onClick={() => updateFoodPrice(foodPrice, id)}>
           Update food price
         </button>
       </label>
