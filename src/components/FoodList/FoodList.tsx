@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react';
+// components
 import FoodItem from '../FoodItem/FoodItem';
 import Form from '../Form/Form';
+
+// custom hooks
+import { useFoodItem } from '../../hooks/useFoodItem';
 
 export interface FoodListProps {
   id: number;
   deleteFoodList: (foodListId: number) => void;
 }
 // https://simplernerd.com/typescript-dynamic-json/
-interface FoodItemProps {
+export interface FoodItemProps {
   [key: string]: any;
 }
 
 const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
   const [foodListData, setFoodListData] = useState<FoodItemProps[]>([]);
+  const [values, setFoodItem] = useFoodItem(foodListData);
 
   const handleChangeUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodListTitle(e.target.value);
@@ -49,21 +54,22 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     localStorage.setItem(id.toString(), JSON.stringify([...updatedList]));
   };
 
-  const handleChangeFoodName = (foodName: string, foodId: number) => {
-    const updatedFoodName = foodListData.map((food) => {
-      if (food.id === foodId) {
-        return {
-          ...food,
-          name: foodName,
-        };
-      }
-      return food;
-    });
-    setFoodListData([...updatedFoodName]);
-    if (localStorage.length) {
-      localStorage.setItem(id.toString(), JSON.stringify(updatedFoodName));
-    }
-  };
+  // const handleChangeFoodName = (foodName: string, foodId: number) => {
+  //   // handleFoodItem(foodListData, foodName, foodId);
+  //   const updatedFoodName = foodListData.map((food) => {
+  //     if (food.id === foodId) {
+  //       return {
+  //         ...food,
+  //         name: foodName,
+  //       };
+  //     }
+  //     return food;
+  //   });
+  //   setFoodListData([...updatedFoodName]);
+  //   if (localStorage.length) {
+  //     localStorage.setItem(id.toString(), JSON.stringify(updatedFoodName));
+  //   }
+  // };
 
   const handleChangeFoodGroup = (foodGroup: string, foodId: number) => {
     const updatedFoodGroup = foodListData.map((food) => {
@@ -164,12 +170,16 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
                 <li key={`${id}-${food.id}`}>
                   <FoodItem
                     id={food.id}
-                    name={food.name}
+                    // name={food.name}
+                    name={values.name}
                     expiration={food.expiration}
                     group={food.group}
                     price={food.price}
                     deleteFoodFromList={handleClickDeleteFoodListItem}
-                    updateFoodName={handleChangeFoodName}
+                    updateFoodName={() =>
+                      setFoodItem(foodListData, food.name, food.id)
+                    }
+                    // updateFoodName={handleChangeFoodName}
                     updateFoodGroup={handleChangeFoodGroup}
                     updateFoodExpiration={handleChangeFoodExpiration}
                     updateFoodPrice={handleChangeFoodPrice}
