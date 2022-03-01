@@ -64,6 +64,7 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       localStorage.setItem(id.toString(), JSON.stringify(updatedFoodName));
     }
   };
+
   const handleChangeFoodGroup = (foodGroup: string, foodId: number) => {
     const updatedFoodGroup = foodListData.map((food) => {
       if (food.id === foodId) {
@@ -79,6 +80,7 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       localStorage.setItem(id.toString(), JSON.stringify(updatedFoodGroup));
     }
   };
+
   const handleChangeFoodExpiration = (
     foodExpiration: string,
     foodId: number
@@ -100,6 +102,7 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
       );
     }
   };
+
   const handleChangeFoodPrice = (foodPrice: number, foodId: number) => {
     const updatedFoodPrice = foodListData.map((food) => {
       if (food.id === foodId) {

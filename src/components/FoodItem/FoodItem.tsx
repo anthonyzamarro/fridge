@@ -24,8 +24,7 @@ const FoodItem = ({
   updateFoodGroup,
   updateFoodExpiration,
   updateFoodPrice,
-}: //
-FoodItemProps) => {
+}: FoodItemProps) => {
   const [foodName, setFoodName] = useState<string>(name);
   const [foodGroup, setFoodGroup] = useState<string>(group);
   const [foodExpiration, setFoodExpiration] = useState<string>(expiration);
