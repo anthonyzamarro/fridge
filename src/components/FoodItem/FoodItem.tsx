@@ -7,10 +7,10 @@ export interface FoodItemProps {
   id: number;
   price?: number;
   deleteFoodFromList: (id: number) => void;
-  updateFoodName: (name: string, id: number) => void;
-  updateFoodGroup: (group: string, id: number) => void;
-  updateFoodExpiration: (expiration: string, id: number) => void;
-  updateFoodPrice: (price: number, id: number) => void;
+  updateFoodName: (name: string, id: number, type: string) => void;
+  updateFoodGroup: (group: string, id: number, type: string) => void;
+  updateFoodExpiration: (expiration: string, id: number, type: string) => void;
+  updateFoodPrice: (price: number, id: number, type: string) => void;
 }
 
 const FoodItem = ({
@@ -67,7 +67,7 @@ const FoodItem = ({
           defaultValue={foodName}
           onChange={(e) => handleChangeUpdateFoodValues(e, 'name')}
         />
-        <button onClick={() => updateFoodName(foodName, id)}>
+        <button onClick={() => updateFoodName(foodName, id, 'name')}>
           Update food name
         </button>
       </label>
@@ -80,7 +80,7 @@ const FoodItem = ({
           defaultValue={foodGroup}
           onChange={(e) => handleChangeUpdateFoodValues(e, 'group')}
         />
-        <button onClick={() => updateFoodGroup(foodGroup, id)}>
+        <button onClick={() => updateFoodGroup(foodGroup, id, 'group')}>
           Update food group
         </button>
       </label>
@@ -93,7 +93,9 @@ const FoodItem = ({
           defaultValue={foodExpiration}
           onChange={(e) => handleChangeUpdateFoodValues(e, 'expiration')}
         />
-        <button onClick={() => updateFoodExpiration(foodExpiration, id)}>
+        <button
+          onClick={() => updateFoodExpiration(foodExpiration, id, 'expiration')}
+        >
           Update food expiration date
         </button>
       </label>
@@ -106,7 +108,7 @@ const FoodItem = ({
           defaultValue={foodPrice}
           onChange={(e) => handleChangeUpdateFoodValues(e, 'price')}
         />
-        <button onClick={() => updateFoodPrice(foodPrice, id)}>
+        <button onClick={() => updateFoodPrice(foodPrice, id, 'price')}>
           Update food price
         </button>
       </label>
