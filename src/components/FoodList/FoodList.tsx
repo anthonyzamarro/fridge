@@ -117,7 +117,6 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
                   <FoodItem
                     id={food.id}
                     name={food.name}
-                    // name={values.name}
                     expiration={food.expiration}
                     group={food.group}
                     price={food.price}

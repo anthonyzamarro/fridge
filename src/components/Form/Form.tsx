@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 // utils functions
 import { dateFormat } from '../../utils/dateFormat';
-// props
-import { FoodListProps } from '../FoodList/FoodList';
 
 interface FormProps {
   listId: number;
-  handleForm: (val: FoodListProps) => void;
+  handleForm: (val: any) => void;
 }
 
 const Form = ({ handleForm, listId }: FormProps) => {

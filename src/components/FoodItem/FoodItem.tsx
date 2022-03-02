@@ -2,10 +2,13 @@ import { useState } from 'react';
 
 export interface FoodItemProps {
   name: string;
-  expiration: string;
   group: string;
+  expiration: string;
+  price: number;
   id: number;
-  price?: number;
+}
+
+export interface FoodItemHookProps extends FoodItemProps {
   deleteFoodFromList: (id: number) => void;
   updateFoodName: (name: string, id: number, type: string) => void;
   updateFoodGroup: (group: string, id: number, type: string) => void;
@@ -24,7 +27,7 @@ const FoodItem = ({
   updateFoodGroup,
   updateFoodExpiration,
   updateFoodPrice,
-}: FoodItemProps) => {
+}: FoodItemHookProps) => {
   const [foodName, setFoodName] = useState<string>(name);
   const [foodGroup, setFoodGroup] = useState<string>(group);
   const [foodExpiration, setFoodExpiration] = useState<string>(expiration);
