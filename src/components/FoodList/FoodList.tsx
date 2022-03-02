@@ -3,9 +3,6 @@ import { useState, useEffect } from 'react';
 import FoodItem from '../FoodItem/FoodItem';
 import Form from '../Form/Form';
 
-// custom hooks
-// import { useFoodItem } from '../../hooks/useFoodItem';
-
 export interface FoodListProps {
   id: number;
   deleteFoodList: (foodListId: number) => void;
@@ -18,7 +15,6 @@ export interface FoodItemProps {
 const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');
   const [foodListData, setFoodListData] = useState<FoodItemProps[]>([]);
-  // const [values, setFoodItem] = useFoodItem(foodListData);
 
   const handleChangeUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFoodListTitle(e.target.value);
