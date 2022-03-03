@@ -65,7 +65,8 @@ const Form = ({ handleForm, listId }: FormProps) => {
         name="name"
         placeholder="food name"
         defaultValue={foodName}
-        onChange={handleChangeFoodName}
+        handleChange={handleChangeFoodName}
+        // onChange={handleChangeFoodName}
       />
       <br />
       <br />

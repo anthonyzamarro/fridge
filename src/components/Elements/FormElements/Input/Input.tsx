@@ -9,9 +9,15 @@ export const Input = ({
   name,
   placeholder,
   defaultValue,
+  handleChange,
 }: InputProps) => {
   const [value, setValue] = useState('');
   console.log(type, name, placeholder, defaultValue);
+  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    handleChange(e);
+  };
+
   return (
     <>
       <StyledInput
@@ -19,9 +25,7 @@ export const Input = ({
         name={name}
         placeholder={placeholder}
         defaultValue={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setValue(e.target.value)
-        }
+        onChange={handleChangeValue}
       />
     </>
   );
