@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { dateFormat } from '../../utils/dateFormat';
 // interfaces
 import { FormProps } from './interfaces';
+// components
+import { Input } from '../Elements/FormElements/Input/Input';
 
 const Form = ({ handleForm, listId }: FormProps) => {
   const [foodName, setFoodName] = useState('');
@@ -58,7 +60,7 @@ const Form = ({ handleForm, listId }: FormProps) => {
   return (
     <form>
       <label htmlFor="name">Food Name: </label>
-      <input
+      <Input
         type="text"
         name="name"
         placeholder="food name"
