@@ -9,10 +9,6 @@ interface FoodListProps {
   foods: object[];
 }
 
-// interface FoodListArrayProps {
-//   list: FoodListProps;
-// }
-
 export const App = () => {
   const [foodList, setFoodList] = useState<FoodListProps[]>([]);
 

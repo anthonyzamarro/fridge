@@ -2,15 +2,8 @@ import { useState, useEffect } from 'react';
 // components
 import FoodItem from '../FoodItem/FoodItem';
 import Form from '../Form/Form';
-
-export interface FoodListProps {
-  id: number;
-  deleteFoodList: (foodListId: number) => void;
-}
-// https://simplernerd.com/typescript-dynamic-json/
-export interface FoodItemProps {
-  [key: string]: any;
-}
+// interfaces
+import { FoodListProps, FoodItemProps } from './interfaces';
 
 const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
   const [foodListTitle, setFoodListTitle] = useState<string>('');

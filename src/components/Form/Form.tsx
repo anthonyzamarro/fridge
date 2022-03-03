@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
 // utils functions
 import { dateFormat } from '../../utils/dateFormat';
-
-interface FormProps {
-  listId: number;
-  handleForm: (val: any) => void;
-}
+// interfaces
+import { FormProps } from './interfaces';
 
 const Form = ({ handleForm, listId }: FormProps) => {
   const [foodName, setFoodName] = useState('');
