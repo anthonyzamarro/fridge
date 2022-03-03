@@ -66,37 +66,36 @@ const Form = ({ handleForm, listId }: FormProps) => {
         placeholder="food name"
         defaultValue={foodName}
         handleChange={handleChangeFoodName}
-        // onChange={handleChangeFoodName}
       />
       <br />
       <br />
       <label htmlFor="group">Food Group: </label>
-      <input
+      <Input
         type="text"
         name="group"
         placeholder="food group"
         defaultValue={foodGroup}
-        onChange={handleChangeFoodGroup}
+        handleChange={handleChangeFoodGroup}
       />
       <br />
       <br />
       <label htmlFor="expiration">Expiration Date: </label>
-      <input
+      <Input
         type="date"
         name="expiration"
         placeholder="food expiration date"
-        onChange={handleChangeFoodExpiration}
         defaultValue={foodExpiration}
+        handleChange={handleChangeFoodExpiration}
       />
       <br />
       <br />
       <label htmlFor="price">Price: </label>
-      <input
+      <Input
         type="number"
         name="price"
         placeholder="price"
-        onChange={handleChangeFoodPrice}
         defaultValue={foodPrice.toString()}
+        handleChange={handleChangeFoodPrice}
       />
       <br />
       <br />

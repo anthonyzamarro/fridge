@@ -1,8 +1,11 @@
+// interface
 import { ButtonProps } from './interface';
+// styles
+import { StyledButton } from './Button.styles';
 export const Button = ({ text, handler }: ButtonProps) => {
   return (
     <>
-      <button onClick={handler}>{text}</button>
+      <StyledButton onClick={handler}>{text}</StyledButton>
     </>
   );
 };
