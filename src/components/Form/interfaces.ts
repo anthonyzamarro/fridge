@@ -1,5 +1,5 @@
-// import { FoodItemProps } from '../FoodItem/interfaces';
+import { FoodItemProps } from '../FoodList/interfaces';
 export interface FormProps {
   listId: number;
-  handleForm: (val: any) => void;
+  handleForm: (val: FoodItemProps) => void;
 }

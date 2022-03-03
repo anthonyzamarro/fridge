@@ -26,7 +26,7 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     }
   };
 
-  const handleAddFoodListItem = (newFoodListData: FoodListProps) => {
+  const handleAddFoodListItem = (newFoodListData: FoodItemProps) => {
     const parsedList = JSON.parse(JSON.stringify(foodListData));
     setFoodListData([...parsedList, newFoodListData]);
     localStorage.setItem(
