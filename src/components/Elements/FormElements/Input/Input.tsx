@@ -1,5 +1,5 @@
-// styles
 import { useState } from 'react';
+// styles
 import { StyledInput } from './Input.styles';
 // interface
 import { InputProps } from './interface';
