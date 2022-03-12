@@ -2,10 +2,9 @@
 import { ButtonProps } from './interface';
 // styles
 import { StyledButton } from './Button.styles';
-export const Button = ({ text, handler }: ButtonProps) => {
-  return (
-    <>
-      <StyledButton onClick={handler}>{text}</StyledButton>
-    </>
-  );
-};
+
+const Button = ({ text, handler }: ButtonProps) => (
+  <StyledButton onClick={handler}>{text}</StyledButton>
+);
+
+export default Button;

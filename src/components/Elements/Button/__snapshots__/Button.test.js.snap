@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`button contains text 1`] = `
+<input
+  className="sc-bdvvtL bdfzay"
+>
+  click me test
+</input>
+`;
