@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // utils functions
-import { dateFormat } from '../../utils/dateFormat';
+import { dateFormat } from '../../utils/dateFormat/dateFormat';
 // interfaces
 import { FormProps } from './interfaces';
 // components
