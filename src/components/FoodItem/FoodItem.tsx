@@ -1,4 +1,6 @@
 import { useState } from 'react';
+// utils functions
+import { dateFormat } from '../../utils/dateFormat';
 // interfaces
 import { FoodItemHookProps } from './interfaces';
 
@@ -74,7 +76,7 @@ const FoodItem = ({
         </button>
       </label>
       <label htmlFor={'foodExpiration'}>
-        <p>Expiration Date: {expiration}</p>
+        <p>Expiration Date: {dateFormat(expiration)}</p>
         <input
           type="date"
           name={foodExpiration}
