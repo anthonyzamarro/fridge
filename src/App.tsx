@@ -54,10 +54,12 @@ export const App = () => {
   };
 
   const updateFoodList = () => {
-    const foods = Object.keys(localStorage).map((key) => {
-      return { id: parseInt(key), foods: localStorage[key] };
-    });
-    setFoodList(foods);
+    if (localStorage.length) {
+      const foods = Object.keys(localStorage).map((key) => {
+        return { id: parseInt(key), foods: localStorage[key] };
+      });
+      setFoodList(foods);
+    }
   };
 
   const handleClickDeleteFoodList = (foodId: number) => {
