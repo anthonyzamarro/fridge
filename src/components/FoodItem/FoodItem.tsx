@@ -1,6 +1,8 @@
 import { useState } from 'react';
 // utils functions
 import { dateFormat } from '../../utils/dateFormat/dateFormat';
+import expirationTimer from '../../utils/expirationTimer/expirationTimer';
+
 // interfaces
 import { FoodItemHookProps } from './interfaces';
 
@@ -46,6 +48,8 @@ const FoodItem = ({
         break;
     }
   };
+
+  expirationTimer(new Date())
 
   return (
     <div key={id}>

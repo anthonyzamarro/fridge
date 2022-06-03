@@ -4,13 +4,13 @@ h1 {
 
 .food-list__container {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
   flex-direction: column;
+  width: 100%;
 }
 
 .food-list {
   border: 5px solid tomato;
   margin: 20px;
   padding: 10px;
+  flex: 1;
 }
