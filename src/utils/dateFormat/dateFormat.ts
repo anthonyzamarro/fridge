@@ -7,7 +7,7 @@ const formatFromHtml = (date: string) => {
 };
 
 const formatLocaleDateString = (date: string) => {
-  let [day, month] = date.split('/');
+  let [month, day] = date.split('/');
   // was getting yelled at because year is never reassigned,
   // so using elision to get the year value: https://stackoverflow.com/questions/47263645/how-to-mix-const-and-let-when-using-object-or-array-destructuring-assignment-in
   const [, , year] = date.split('/');
@@ -17,9 +17,9 @@ const formatLocaleDateString = (date: string) => {
 };
 
 export const dateFormat = (val: string) => {
-  if (val !== '' && val.includes('-')) {
-    return formatFromHtml(val);
+  if (!val) {
+    const today = new Date();
+    return formatLocaleDateString(today.toLocaleDateString());
   }
-  const today = new Date();
-  return formatLocaleDateString(today.toLocaleDateString());
+  return formatFromHtml(val);
 };

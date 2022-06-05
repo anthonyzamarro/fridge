@@ -51,7 +51,7 @@ const Form = ({ handleForm, listId }: FormProps) => {
     handleForm({
       name: foodName,
       group: foodGroup,
-      expiration: dateFormat(foodExpiration),
+      expiration: foodExpiration,
       price: foodPrice,
       id: foodId,
     });

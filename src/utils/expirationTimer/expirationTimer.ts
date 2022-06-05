@@ -22,7 +22,7 @@ const expirationTimer = ({
  let twoWeeksFromToday = today.setDate(today.getDate() + 14)
  let expirationDate = new Date(twoWeeksFromToday)
 
-  console.log(twoWeeksFromToday, expirationDate)
+  // console.log(twoWeeksFromToday, expirationDate)
 
     // switch(foodGroup) {
     //   case 'vegetable':
