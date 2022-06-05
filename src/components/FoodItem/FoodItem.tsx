@@ -66,7 +66,11 @@ const FoodItem = ({
 
   return (
     <div key={id}>
-      <h2>{expirationTimer(expiration) === 1 ? '1 day' : `${expirationTimer(expiration)} days`} until expiration</h2>
+      {
+        expirationTimer(expiration) <= 0 ? <span style={{'color': 'red', 'background' : 'yellow', 'padding' : '3px'}}>FOOD IS EXPIRED</span>
+        :
+        <h2>{expirationTimer(expiration) === 1 ? '1 day' : `${expirationTimer(expiration)} days`} until expiration</h2>
+      }
       <label htmlFor={'foodName'}>
         <p>Food Name: {name}</p>
         <input
