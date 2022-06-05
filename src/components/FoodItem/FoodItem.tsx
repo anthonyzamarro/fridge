@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 // utils functions
 import { dateFormat } from '../../utils/dateFormat/dateFormat';
+import expirationTimer from '../../utils/expirationTimer/expirationTimer';
 // import expirationDate from '../../utils/expirationDate/expirationDate';
 // import expirationTimer from '../../utils/expirationTimer/expirationTimer';
 
@@ -65,6 +66,7 @@ const FoodItem = ({
 
   return (
     <div key={id}>
+      <h2>{expirationTimer(expiration) === 1 ? '1 day' : `${expirationTimer(expiration)} days`} until expiration</h2>
       <label htmlFor={'foodName'}>
         <p>Food Name: {name}</p>
         <input
