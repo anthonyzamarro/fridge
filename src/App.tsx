@@ -75,7 +75,7 @@ export const App = () => {
 
   return (
     <>
-      <h1>Hello, React {process.env.NODE_ENV}</h1>
+      <h1>Whats in my Fridge?</h1>
       <div>
         <input
           type="button"

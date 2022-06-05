@@ -1,6 +1,15 @@
+export enum FoodGroupEnum {
+  dairy = 'dairy',
+  meat = 'meat' ,
+  vegetable = 'vegetable' ,
+  fruit = 'fruit' ,
+  grain = 'grain' ,
+  fat = 'fat',
+}
+
 export interface FoodItemProps {
   name: string;
-  group: string;
+  group: FoodGroupEnum;
   expiration: string;
   price: number;
   id: number;

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // utils functions
 import { dateFormat } from '../../utils/dateFormat/dateFormat';
-import expirationTimer from '../../utils/expirationTimer/expirationTimer';
+// import expirationDate from '../../utils/expirationDate/expirationDate';
+// import expirationTimer from '../../utils/expirationTimer/expirationTimer';
 
 // interfaces
-import { FoodItemHookProps } from './interfaces';
+import { FoodGroupEnum, FoodItemHookProps } from './interfaces';
 
 const FoodItem = ({
   name,
@@ -21,6 +22,7 @@ const FoodItem = ({
   const [foodName, setFoodName] = useState<string>(name);
   const [foodGroup, setFoodGroup] = useState<string>(group);
   const [foodExpiration, setFoodExpiration] = useState<string>(expiration);
+  const [expired, setExpired] = useState<boolean>(false);
   const [foodPrice, setFoodPrice] = useState<number>(price as number);
 
   const handleClickDeleteFoodItem = () => {
@@ -49,7 +51,17 @@ const FoodItem = ({
     }
   };
 
-  expirationTimer(new Date())
+  useEffect(() => {
+    let today = new Date()
+    let expiresObject = new Date(expiration)
+    let expires = new Date(expiresObject.setDate(expiresObject.getDate() + 1))
+    if (expires < today) {
+      setExpired(true)
+    } else {
+      setExpired(false)
+    }
+  }, [expiration])
+
 
   return (
     <div key={id}>
@@ -80,14 +92,17 @@ const FoodItem = ({
         </button>
       </label>
       <label htmlFor={'foodExpiration'}>
-        <p>Expiration Date: {dateFormat(expiration)}</p>
+        <p>
+          Expiration Date: {dateFormat(expiration)} {" "}
+          {expired && <span style={{'color': 'red', 'background' : 'yellow', 'padding' : '3px'}}>FOOD IS EXPIRED</span>}
+        </p>
         <input
           type="date"
           name={foodExpiration}
           id={foodExpiration}
           defaultValue={foodExpiration}
           onChange={(e) => handleChangeUpdateFoodValues(e, 'expiration')}
-        />
+          />
         <button
           onClick={() => updateFoodExpiration(foodExpiration, id, 'expiration')}
         >

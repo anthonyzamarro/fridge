@@ -1,11 +1,7 @@
 import { expirationTimerProps } from "./interfaces";
 
 const expirationTimer = ({
-  date, 
-  // foodGroup, 
-  // packaging, 
-  // refridgerated, 
-  // frozen
+  date,
   }: expirationTimerProps) => {
   /**  
     timer function that is started whenever new food item is added to a list
@@ -13,20 +9,12 @@ const expirationTimer = ({
     and when it was added to the list
 
     expiration based: 
-    - on date bought 
+    - on date input
     - food group
     - food packaging
     - if refridgerated/freezed
   */
- let today = new Date()
- let twoWeeksFromToday = today.setDate(today.getDate() + 14)
- let expirationDate = new Date(twoWeeksFromToday)
-
-  // console.log(twoWeeksFromToday, expirationDate)
-
-    // switch(foodGroup) {
-    //   case 'vegetable':
-    // }
+  
 };
 
 export default expirationTimer
