@@ -72,7 +72,7 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
        */
       setFoodListData(JSON.parse(localStorage[id]));
     }
-  }, []);
+  }, [id]);
 
   return (
     <div key={id} className={`food-list ${id}`}>

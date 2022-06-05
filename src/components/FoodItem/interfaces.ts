@@ -1,9 +1,9 @@
 export enum FoodGroupEnum {
   dairy = 'dairy',
-  meat = 'meat' ,
-  vegetable = 'vegetable' ,
-  fruit = 'fruit' ,
-  grain = 'grain' ,
+  meat = 'meat',
+  vegetable = 'vegetable',
+  fruit = 'fruit',
+  grain = 'grain',
   fat = 'fat',
 }
 

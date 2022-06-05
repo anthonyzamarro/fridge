@@ -1,12 +1,11 @@
+import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 // utils functions
-import { dateFormat } from '../../utils/dateFormat/dateFormat';
+// import { dateFormat } from '../../utils/dateFormat/dateFormat';
 import expirationTimer from '../../utils/expirationTimer/expirationTimer';
-// import expirationDate from '../../utils/expirationDate/expirationDate';
-// import expirationTimer from '../../utils/expirationTimer/expirationTimer';
 
 // interfaces
-import { FoodGroupEnum, FoodItemHookProps } from './interfaces';
+import { FoodItemHookProps } from './interfaces';
 
 const FoodItem = ({
   name,
@@ -53,24 +52,32 @@ const FoodItem = ({
   };
 
   useEffect(() => {
-    let today = new Date()
-    let expiresObject = new Date(expiration)
-    let expires = new Date(expiresObject.setDate(expiresObject.getDate() + 1))
+    const today = new Date();
+    const expiresObject = new Date(expiration);
+    const expires = new Date(
+      expiresObject.setDate(expiresObject.getDate() + 1)
+    );
     if (expires < today) {
-      setExpired(true)
+      setExpired(true);
     } else {
-      setExpired(false)
+      setExpired(false);
     }
-  }, [expiration])
-
+  }, [expiration]);
 
   return (
     <div key={id}>
-      {
-        expirationTimer(expiration) <= 0 ? <span style={{'color': 'red', 'background' : 'yellow', 'padding' : '3px'}}>FOOD IS EXPIRED</span>
-        :
-        <h2>{expirationTimer(expiration) === 1 ? '1 day' : `${expirationTimer(expiration)} days`} until expiration</h2>
-      }
+      {expirationTimer(expiration) <= 0 ? (
+        <span style={{ color: 'red', background: 'yellow', padding: '3px' }}>
+          FOOD IS EXPIRED
+        </span>
+      ) : (
+        <h2>
+          {expirationTimer(expiration) === 1
+            ? '1 day'
+            : `${expirationTimer(expiration)} days`}{' '}
+          until expiration
+        </h2>
+      )}
       <label htmlFor={'foodName'}>
         <p>Food Name: {name}</p>
         <input
@@ -99,8 +106,20 @@ const FoodItem = ({
       </label>
       <label htmlFor={'foodExpiration'}>
         <p>
-          Expiration Date: {dateFormat(expiration)} {" "}
-          {expired && <span style={{'color': 'red', 'background' : 'yellow', 'padding' : '3px'}}>FOOD IS EXPIRED</span>}
+          Expiration Date:{' '}
+          {format(
+            new Date(
+              new Date(expiration).setDate(new Date(expiration).getDate() + 1)
+            ),
+            'MM/dd/yyyy'
+          )}{' '}
+          {expired && (
+            <span
+              style={{ color: 'red', background: 'yellow', padding: '3px' }}
+            >
+              FOOD IS EXPIRED
+            </span>
+          )}
         </p>
         <input
           type="date"
@@ -108,7 +127,7 @@ const FoodItem = ({
           id={foodExpiration}
           defaultValue={foodExpiration}
           onChange={(e) => handleChangeUpdateFoodValues(e, 'expiration')}
-          />
+        />
         <button
           onClick={() => updateFoodExpiration(foodExpiration, id, 'expiration')}
         >

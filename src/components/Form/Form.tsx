@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-// utils functions
-import { dateFormat } from '../../utils/dateFormat/dateFormat';
 // interfaces
 import { FormProps } from './interfaces';
 // components
@@ -9,7 +7,7 @@ import { Input } from '../Elements/FormElements/Input/Input';
 const Form = ({ handleForm, listId }: FormProps) => {
   const [foodName, setFoodName] = useState('');
   const [foodGroup, setFoodGroup] = useState('');
-  const [foodExpiration, setFoodExpiration] = useState('');
+  const [foodExpiration, setFoodExpiration] = useState(new Date().toString());
   const [foodPrice, setFoodPrice] = useState(0);
   const [foodId, setFoodId] = useState(1);
 
@@ -24,6 +22,7 @@ const Form = ({ handleForm, listId }: FormProps) => {
   const handleChangeFoodExpiration = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
+    // console.log('FORM', e.target.value);
     setFoodExpiration(e.target.value);
   };
 
@@ -44,7 +43,7 @@ const Form = ({ handleForm, listId }: FormProps) => {
         setFoodId(parseInt(lastId) + 1);
       }
     }
-  }, []);
+  }, [listId]);
 
   const submitFormData = () => {
     setFoodId(foodId + 1);
