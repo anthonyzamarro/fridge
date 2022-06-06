@@ -55,8 +55,9 @@ const FoodItem = ({
     const today = new Date();
     const expiresObject = new Date(expiration);
     const expires = new Date(
-      expiresObject.setDate(expiresObject.getDate() + 1)
+      expiresObject.setDate(expiresObject.getDate()) + 1
     );
+    console.log(expires, today, expires < today, expiration);
     if (expires < today) {
       setExpired(true);
     } else {
@@ -66,7 +67,7 @@ const FoodItem = ({
 
   return (
     <div key={id}>
-      {expirationTimer(expiration) <= 0 ? (
+      {expired ? (
         <span style={{ color: 'red', background: 'yellow', padding: '3px' }}>
           FOOD IS EXPIRED
         </span>
@@ -109,7 +110,9 @@ const FoodItem = ({
           Expiration Date:{' '}
           {format(
             new Date(
-              new Date(expiration).setDate(new Date(expiration).getDate() + 1)
+              new Date(expiration).setUTCDate(
+                new Date(expiration).getUTCDate() + 1
+              )
             ),
             'MM/dd/yyyy'
           )}{' '}
