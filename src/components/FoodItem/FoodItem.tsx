@@ -1,8 +1,7 @@
-import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 // utils functions
-// import { dateFormat } from '../../utils/dateFormat/dateFormat';
 import expirationTimer from '../../utils/expirationTimer/expirationTimer';
+import { format } from 'date-fns';
 
 // interfaces
 import { FoodItemHookProps } from './interfaces';
@@ -41,7 +40,13 @@ const FoodItem = ({
         setFoodGroup(e.target.value);
         break;
       case 'expiration':
-        setFoodExpiration(e.target.value);
+        const [year, month, day] = e.target.value.split('-');
+        setFoodExpiration(
+          format(
+            new Date(parseInt(year), parseInt(month) - 1, parseInt(day)),
+            'MM/dd/yyyy'
+          )
+        );
         break;
       case 'price':
         setFoodPrice(parseInt(e.target.value));
@@ -52,13 +57,8 @@ const FoodItem = ({
   };
 
   useEffect(() => {
-    const today = new Date();
-    const expiresObject = new Date(expiration);
-    const expires = new Date(
-      expiresObject.setDate(expiresObject.getDate()) + 1
-    );
-    console.log(expires, today, expires < today, expiration);
-    if (expires < today) {
+    const today = format(new Date(), 'MM/dd/yyyy');
+    if (expiration <= today) {
       setExpired(true);
     } else {
       setExpired(false);
@@ -107,15 +107,7 @@ const FoodItem = ({
       </label>
       <label htmlFor={'foodExpiration'}>
         <p>
-          Expiration Date:{' '}
-          {format(
-            new Date(
-              new Date(expiration).setUTCDate(
-                new Date(expiration).getUTCDate() + 1
-              )
-            ),
-            'MM/dd/yyyy'
-          )}{' '}
+          Expiration Date: {expiration}
           {expired && (
             <span
               style={{ color: 'red', background: 'yellow', padding: '3px' }}
@@ -124,11 +116,12 @@ const FoodItem = ({
             </span>
           )}
         </p>
+        {console.log('foodExpiration!', foodExpiration)}
         <input
           type="date"
           name={foodExpiration}
           id={foodExpiration}
-          defaultValue={foodExpiration}
+          defaultValue={format(new Date(foodExpiration), 'yyyy-MM-dd')}
           onChange={(e) => handleChangeUpdateFoodValues(e, 'expiration')}
         />
         <button

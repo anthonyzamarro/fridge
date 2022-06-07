@@ -18,8 +18,6 @@ const expirationTimer = (expiration: string): number => {
     return 0;
   }
 
-  // console.log(expirationDate, differenceInDays(expirationDate, today));
-
   return differenceInDays(expirationDate, today);
 };
 

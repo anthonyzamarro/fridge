@@ -3,11 +3,14 @@ import { useEffect, useState } from 'react';
 import { FormProps } from './interfaces';
 // components
 import { Input } from '../Elements/FormElements/Input/Input';
+import { format } from 'date-fns';
 
 const Form = ({ handleForm, listId }: FormProps) => {
   const [foodName, setFoodName] = useState('');
   const [foodGroup, setFoodGroup] = useState('');
-  const [foodExpiration, setFoodExpiration] = useState(new Date().toString());
+  const [foodExpiration, setFoodExpiration] = useState(
+    format(new Date(), 'MM/dd/yyyy')
+  );
   const [foodPrice, setFoodPrice] = useState(0);
   const [foodId, setFoodId] = useState(1);
 
@@ -22,8 +25,17 @@ const Form = ({ handleForm, listId }: FormProps) => {
   const handleChangeFoodExpiration = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // console.log('FORM', e.target.value);
-    setFoodExpiration(e.target.value);
+    if (e.target.value.includes('-')) {
+      const [year, month, day] = e.target.value.split('-');
+      setFoodExpiration(
+        format(
+          new Date(parseInt(year), parseInt(month) - 1, parseInt(day)),
+          'MM/dd/yyyy'
+        )
+      );
+    } else {
+      setFoodExpiration(e.target.value);
+    }
   };
 
   const handleChangeFoodPrice = (e: React.ChangeEvent<HTMLInputElement>) => {

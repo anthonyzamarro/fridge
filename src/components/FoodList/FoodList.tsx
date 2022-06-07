@@ -48,7 +48,6 @@ const FoodList = ({ id, deleteFoodList }: FoodListProps) => {
     foodId: number,
     type: string
   ) => {
-    // console.log(field, foodId);
     const updatedFoodList = foodListData.map((food) => {
       if (food.id === foodId) {
         return {
